@@ -1,6 +1,6 @@
 #!/bin/sh
 
-read -p "Installation PACKAGES for Marsupial Simulator. Press a ENTER to contine. (CTRL+C) to cancel"
+read -p "Installation PACKAGES Dependencies for Marsupial Simulator. Press a ENTER to contine. (CTRL+C) to cancel"
 
 
 # For drone simulation
