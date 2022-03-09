@@ -1,0 +1,40 @@
+<launch>
+    # --------------------------------------------------------------------- PARAMETER --------------------------------------------------------------------- 
+    
+    ## General Parameters
+    <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find marsupial_description)/models/"/>
+    <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find marsupial_description)/models/"/>
+
+    <arg name="gui" default="true" />
+    <arg name="paused" default="true" />
+
+    ## UAV Parameter
+    <arg name="init_pos_x" default="0" />
+    <arg name="init_pos_y" default="0" />
+    <arg name="init_pos_z" default="0.0" />
+    <arg name="init_pos_th" default="0.0" />
+
+
+    ## UGV Parameter Define real/simulation and controller type
+    <arg name="world_name" value="empty" />    
+    
+    # --------------------------------------------------------------------- NODES --------------------------------------------------------------------- 
+    
+    # ---------------------------------------------------Start Gazebo environment ---------------------------------------------------
+    
+    <include file="$(find idmind_arco)/launch/empty_world.launch">
+        <!-- <arg name="world_name" default="$(find marsupial_gazebo)/worlds/hang_tether.world" /> -->
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="debug" value="false" />
+        <arg name="verbose" value="true" />
+    </include>
+
+    ## Spawn Model Gazebo
+    <!-- <node name="marsupial_spawn" pkg="gazebo_ros" type="spawn_model"  args="-file $(find marsupial_description)/models/test_tether/test_tether.sdf -sdf -model test_tether
+                                                                        -x $(arg init_pos_x) -y $(arg init_pos_y) -z $(arg init_pos_z) -R 0 -P 0 -Y 0" output="screen"/> -->
+
+    <node name="marsupial_spawn" pkg="gazebo_ros" type="spawn_model"  args="-file $(find marsupial_description)/models/hang/hang.sdf -sdf -model hang
+                                                                        -x $(arg init_pos_x) -y $(arg init_pos_y) -z $(arg init_pos_z) -R 0 -P 0 -Y 0" output="screen"/>
+
+</launch>

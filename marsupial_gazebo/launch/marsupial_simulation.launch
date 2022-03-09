@@ -1,0 +1,140 @@
+<launch>
+    # --------------------------------------------------------------------- PARAMETER --------------------------------------------------------------------- 
+    
+    ## General Parameters
+    <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find rotors_gazebo)/models:$(find marsupial_description)/models/"/>
+    <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find rotors_gazebo)/models:$(find marsupial_description)/models/"/>
+
+    <arg name="launch_ugv" default="false" />
+    <arg name="launch_uav" default="true" />
+    <arg name="gui" default="true" />
+    <arg name="paused" default="true" />
+    <arg name="world_name" default="lispolis_simul" />
+    <!-- <arg name="world_name" default="$(find idmind_arco)/worlds/$(arg config)_simul.world" /> -->
+
+    <!-- <arg name="use_sim_time" default="true"/> -->
+
+
+    ## UAV Parameter
+    <arg name="uav_name" default="ardrone" />
+    <arg name="ugv_name" default="arco" />
+    <arg name="init_pos_x" default="-16.1" />
+    <arg name="init_pos_y" default="-3.5" />
+    <arg name="init_pos_z" default="0.0" />
+    <arg name="init_pos_th" default="0.5" />
+    <!-- <arg name="init_pos_x" default="0.0" />
+    <arg name="init_pos_y" default="0.0" />
+    <arg name="init_pos_z" default="0.0" />
+    <arg name="init_pos_th" default="0.0" /> -->
+
+    ## UGV Parameter Define real/simulation and controller type
+    <arg name="config" value="lispolis" />    
+    <arg name="simulation" value="true" />                                  <!-- Define if it will run on a robot or simulation -->
+    
+    # --------------------------------------------------------------------- NODES --------------------------------------------------------------------- 
+    
+    # ---------------------------------------------------Start Gazebo environment ---------------------------------------------------
+    <!-- <param name="/use_sim_time" value="$(arg use_sim_time)"/> -->
+    
+    <include file="$(find idmind_arco)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find marsupial_gazebo)/worlds/$(arg world_name).world" />
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="debug" value="false" />
+        <arg name="verbose" value="true" />
+    </include>
+
+    ## Spawn Model Gazebo
+    <node name="marsupial_spawn" pkg="gazebo_ros" type="spawn_model"  args="-file $(find marsupial_description)/models/marsupial/marsupial.sdf -sdf -model marsupial
+                                                                        -x $(arg init_pos_x) -y $(arg init_pos_y) -z $(arg init_pos_z) -R 0 -P 0 -Y 0" output="screen"/>
+
+    <include file="$(find marsupial_gazebo)/launch/marsupial_frames_simulation.launch">
+        <arg name="ugv_name" value="$(arg ugv_name)"/>
+        <arg name="uav_name" value="$(arg uav_name)"/>
+    </include>
+    
+
+    # --------------------------------------------------- Start UGV Simulation ---------------------------------------------------
+
+<group if="$(arg launch_ugv)">
+    
+    ## UGV Localization Stuff
+
+    <group ns="$(arg ugv_name)">
+        <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_ugv_dll" output="screen"
+            args="10 marsupial_optimizer dll.launch robot_name:=$(arg ugv_name)  initial_x:=12.0 initial_y:=20.08 initial_z:=0.3 initial_a:=0.0">
+        </node>
+
+        <!-- Start Diagnostics Aggreagator -->
+        <include file="$(find idmind_diagnostics)/launch/idmind_diagnostics.launch" />
+
+        <!-- Otherwise initiate sensors -->
+        <group unless="$(arg simulation)">
+            <include file="$(find idmind_imu)/launch/idmind_imu.launch">
+                <arg name="imu" value="razor" />
+                <arg name="tf_prefix" value="$(arg robot_name)/" />
+            </include>
+        </group>
+        
+        <!-- Start sensors and actuators nodes -->
+        <include file="$(find idmind_sensorsboard)/launch/idmind_sensorsboard.launch">
+            <arg name="simulation" value="$(arg simulation)" />
+        </include>
+
+        <!-- Start interface node -->
+        <include file="$(find idmind_interface)/launch/idmind_interface.launch">
+        </include>
+
+        <!-- Start idmind_teleop -->
+        <include file="$(find idmind_teleop)/launch/idmind_teleop.launch">
+            <arg name="cmd_vel_topic" default="idmind_motors/set_velocities" />
+        </include>
+
+        <!-- PointCloud to laser scan -->
+        <!-- <include file="$(find marsupial_optimizer)/launch/simulation/arco_pointcloud2_to_laser.launch">
+            <arg name="robot_name" value="$(arg ugv_name)"/>
+        </include> -->
+    </group>
+</group>
+
+    # --------------------------------------------------- Start UAV Simulation ---------------------------------------------------
+    
+<group if="$(arg launch_uav)">
+
+    <group ns="$(arg uav_name)">
+
+        ## UAV Control Stuff
+        <node name="roll_pitch_yawrate_thrust_controller_node" pkg="rotors_control" type="roll_pitch_yawrate_thrust_controller_node" output="screen">
+            <rosparam command="load" file="$(find rotors_gazebo)/resource/roll_pitch_yawrate_thrust_controller_$(arg uav_name).yaml" />
+            <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg uav_name).yaml" />
+            <remap from="/$(arg uav_name)/odometry" to="ground_truth/odometry"/> # /laser_odom_to_init" loam
+        </node>
+        
+        <node name="velocity_PID_controller" pkg="rotors_control" type="velocity_PID_controller" output="screen">
+            <remap from="/$(arg uav_name)/odom" to="ground_truth/odometry"/> # /laser_odom_to_init" loam
+        </node>
+        
+        ## UAV Joy Stuff
+        <node pkg="joy" type="joy_node" name="joy_$(arg uav_name)" respawn="true" >
+            <param name="dev" type="string" value="/dev/input/js1" /> 
+            <param name="deadzone" value="0.12" />
+        </node>
+
+        <node pkg="rotors_joy_interface" type="joy_vel" name="joy_vel_$(arg uav_name)" respawn="true" />
+
+        ## UAV Localization Stuff
+        <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_dll" output="screen"
+            args="12 marsupial_optimizer dll.launch robot_name:=$(arg uav_name) initial_x:=12.0 initial_y:=20.08 initial_z:=0.5 initial_a:=0.0">
+        </node>
+    
+    </group>
+
+        ## UAV Lidar Odometry Stuff
+        <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_aloam" output="screen"
+            args="10 marsupial_optimizer aloam.launch robot_name:=$(arg uav_name) only_odometry:=true">
+        </node>
+        
+</group>
+        
+        
+</launch>

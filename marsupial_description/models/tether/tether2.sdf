@@ -1,0 +1,976 @@
+<?xml version="1.0" ?>
+<sdf version='1.7'>
+  <model name='tether'>
+    <static>false</static>
+    <link name='linking_1'>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_1_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_1_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_2' type='revolute'>
+      <pose relative_to='linking_1'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_1</parent>
+      <child>linking_2</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_2'>
+      <pose relative_to='joint_tether_2'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_2_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_2_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_3' type='revolute'>
+      <pose relative_to='linking_2'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_2</parent>
+      <child>linking_3</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_3'>
+      <pose relative_to='joint_tether_3'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_3_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_3_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_4' type='revolute'>
+      <pose relative_to='linking_3'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_3</parent>
+      <child>linking_4</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_4'>
+      <pose relative_to='joint_tether_4'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_4_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_4_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_5' type='revolute'>
+      <pose relative_to='linking_4'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_4</parent>
+      <child>linking_5</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_5'>
+      <pose relative_to='joint_tether_5'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_5_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_5_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_6' type='revolute'>
+      <pose relative_to='linking_5'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_5</parent>
+      <child>linking_6</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_6'>
+      <pose relative_to='joint_tether_6'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_6_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_6_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_7' type='revolute'>
+      <pose relative_to='linking_6'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_6</parent>
+      <child>linking_7</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_7'>
+      <pose relative_to='joint_tether_7'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_7_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_7_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_8' type='revolute'>
+      <pose relative_to='linking_7'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_7</parent>
+      <child>linking_8</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_8'>
+      <pose relative_to='joint_tether_8'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_8_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_8_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_9' type='revolute'>
+      <pose relative_to='linking_8'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_8</parent>
+      <child>linking_9</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_9'>
+      <pose relative_to='joint_tether_9'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_9_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_9_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_10' type='revolute'>
+      <pose relative_to='linking_9'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_9</parent>
+      <child>linking_10</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_10'>
+      <pose relative_to='joint_tether_10'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_10_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_10_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_11' type='revolute'>
+      <pose relative_to='linking_10'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_10</parent>
+      <child>linking_11</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_11'>
+      <pose relative_to='joint_tether_11'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_11_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_11_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_12' type='revolute'>
+      <pose relative_to='linking_11'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_11</parent>
+      <child>linking_12</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_12'>
+      <pose relative_to='joint_tether_12'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_12_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_12_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_13' type='revolute'>
+      <pose relative_to='linking_12'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_12</parent>
+      <child>linking_13</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_13'>
+      <pose relative_to='joint_tether_13'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_13_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_13_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_14' type='revolute'>
+      <pose relative_to='linking_13'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_13</parent>
+      <child>linking_14</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_14'>
+      <pose relative_to='joint_tether_14'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_14_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_14_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_15' type='revolute'>
+      <pose relative_to='linking_14'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_14</parent>
+      <child>linking_15</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_15'>
+      <pose relative_to='joint_tether_15'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_15_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_15_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_16' type='revolute'>
+      <pose relative_to='linking_15'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_15</parent>
+      <child>linking_16</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_16'>
+      <pose relative_to='joint_tether_16'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_16_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_16_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_17' type='revolute'>
+      <pose relative_to='linking_16'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_16</parent>
+      <child>linking_17</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_17'>
+      <pose relative_to='joint_tether_17'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_17_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_17_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_18' type='revolute'>
+      <pose relative_to='linking_17'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_17</parent>
+      <child>linking_18</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_18'>
+      <pose relative_to='joint_tether_18'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_18_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_18_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_19' type='revolute'>
+      <pose relative_to='linking_18'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_18</parent>
+      <child>linking_19</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_19'>
+      <pose relative_to='joint_tether_19'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_19_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_19_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='joint_tether_20' type='revolute'>
+      <pose relative_to='linking_19'>0 0 0.01 0 -0 0</pose>
+      <parent>linking_19</parent>
+      <child>linking_20</child>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-2.200000</lower>
+          <upper>2.200000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='linking_20'>
+      <pose relative_to='joint_tether_20'>0 0 0.01 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1.97917e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.97917e-07</iyy>
+          <iyz>0</iyz>
+          <izz>6.25e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='linking_20_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='linking_20_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <static>0</static>
+    <plugin name='gazebo_ros_modelate_tether' filename='libgazebo_ros_modelate_tether.so'>
+      <namespace>marsupial_tether</namespace>
+      <numLinkTether>20</numLinkTether>
+      <nameLinkFrame>tether::linking</nameLinkFrame>
+      <initLengthTether>0.5</initLengthTether>
+    </plugin>
+  </model>
+</sdf>

@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <model name="tether_marsupial">
+    <self_collide>true</self_collide>
+
+     <!-- <include>
+      <uri>model://tether</uri> 
+      <pose>-0.10 0 0.58 0.0 0.20 0</pose>
+    </include>  
+
+    <include>
+      <uri>model://arco</uri>
+      <pose>0 0 0.18 0 0 0</pose>
+    </include>
+
+     <joint name="marsupial/arco_tether_joint" type="fixed">
+      <pose relative_to='tether::link_1'>0 0 -0.022 0 -0 0</pose>
+      <parent>arco::base_platform</parent>
+      <child>tether::link_1</child>
+    </joint>  -->
+
+    <include>
+      <uri>model://ardrone</uri> 
+      <pose>0.08 0 1.48 0 0</pose>
+    </include> 
+
+    <!-- <joint name="marsupial/tether_firefly_joint" type="fixed">
+      <pose relative_to='tether::link_40'>0 0 0.02 0 -0 0</pose>
+      <parent>ardrone::ardrone/base_link</parent>
+      <child>tether::link_40</child>
+    </joint>  -->
+
+  </model>
+</sdf>
+
