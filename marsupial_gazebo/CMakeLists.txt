@@ -15,10 +15,28 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   tf
   tf2_ros
+  geographic_msgs
 )
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 
+## Generate services in the 'srv' folder
+add_service_files(DIRECTORY srv
+  FILES
+    SetBias.srv
+    SetReferenceGeoPose.srv
+)
+
+## Generate added messages and services with any dependencies listed here
+generate_messages(
+  DEPENDENCIES geographic_msgs
+)
+
+#add dynamic reconfigure api
+generate_dynamic_reconfigure_options(
+  cfg/SensorModel.cfg
+  cfg/GNSS.cfg
+)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -109,6 +127,7 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
+  CATKIN_DEPENDS geographic_msgs
   INCLUDE_DIRS include
   LIBRARIES marsupial_gazebo
   gazebo_ros_planar_move_optional_tf
@@ -210,10 +229,15 @@ target_link_libraries(gazebo_ros_modelate_tether ${catkin_LIBRARIES} ${Boost_LIB
 add_library(publisher_frames_sdf_model src/publisher_frames_sdf_model.cpp)
 target_link_libraries(publisher_frames_sdf_model ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${GAZEBO_LIBRARIES})
 
+add_library(hector_gazebo_ros_gps src/gazebo_ros_gps.cpp)
+target_link_libraries(hector_gazebo_ros_gps ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES})
+add_dependencies(hector_gazebo_ros_gps ${PROJECT_NAME}_generate_messages_cpp ${PROJECT_NAME}_gencfg)
+
 install(TARGETS
   gazebo_ros_planar_move_optional_tf
   gazebo_ros_modelate_tether
   publisher_frames_sdf_model
+  hector_gazebo_ros_gps
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

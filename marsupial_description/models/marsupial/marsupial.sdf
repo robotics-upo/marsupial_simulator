@@ -20,8 +20,8 @@
     </joint>  -->
 
     <include>
-      <uri>model://ardrone</uri> 
-      <!-- <uri>model://firefly</uri>  -->
+      <!-- <uri>model://ardrone</uri>  -->
+      <uri>model://firefly</uri> 
       <pose>0.08 0 1.48 0 0</pose>
     </include> 
 

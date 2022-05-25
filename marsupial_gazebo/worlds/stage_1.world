@@ -1904,7 +1904,8 @@
       <pose frame=''>-5.82913 3.93238 0 0 -0 0</pose>
     </model>
 
-  <plugin name='gazebo_octomap' filename='libBuildOctomapPlugin.so'/>
+  <!-- <plugin name='gazebo_octomap' filename='libBuildOctomapPlugin.so'/> -->
+  <plugin name="ros_interface_plugin" filename="librotors_gazebo_ros_interface_plugin.so"/>
 
   </world>
 </sdf>

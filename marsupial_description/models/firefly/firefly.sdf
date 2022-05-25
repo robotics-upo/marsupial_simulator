@@ -61,8 +61,8 @@
           </noise>
         </ray>
         <plugin name='fireflygazebo_ros_laser_controller' filename='libgazebo_ros_velodyne_laser.so'>
-          <topicName>os1_cloud_node/points</topicName>
-          <frameName>os1_sensor</frameName>
+          <topicName>/firefly/os1_cloud_node/points</topicName>
+          <frameName>/firefly/os1_sensor</frameName>
           <min_range>0.8</min_range>
           <max_range>120.0</max_range>
           <gaussianNoise>0.03</gaussianNoise>
@@ -664,6 +664,13 @@
       <noiseUniformQuaternion>0 0 0</noiseUniformQuaternion>
       <noiseUniformLinearVelocity>0 0 0</noiseUniformLinearVelocity>
       <noiseUniformAngularVelocity>0 0 0</noiseUniformAngularVelocity>
+    </plugin>
+    <plugin name='hector_gazebo_ros_gps' filename="libhector_gazebo_ros_gps.so">
+      <updateRate>5.0</updateRate>
+      <robotNamespace>firefly</robotNamespace>
+      <bodyName>firefly/base_link</bodyName>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <topicName>gps</topicName>
     </plugin>
   </model>
 </sdf>
