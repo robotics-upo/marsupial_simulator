@@ -28,5 +28,5 @@ your_catkin_ws> catkin_make
 To launch a basic simulation please use the provided launch file.
 
 ```
-your_catkin_ws/src>
+ > roslaunch marsupial_gazebo marsupial_simulation.launch
 ```
