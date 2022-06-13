@@ -2,14 +2,15 @@
     # --------------------------------------------------------------------- PARAMETER --------------------------------------------------------------------- 
     
     ## General Parameters
-    <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find rotors_gazebo)/models:$(find marsupial_description)/models/"/>
-    <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find rotors_gazebo)/models:$(find marsupial_description)/models/"/>
+    <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find rotors_gazebo)/models:$(find marsupial_description)/models/:$(find marsupial_gazebo)/models/"/>
+    <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find rotors_gazebo)/models:$(find marsupial_description)/models/:$(find marsupial_gazebo)/models/"/>
 
     <arg name="launch_ugv" default="false" />
     <arg name="launch_uav" default="true" />
     <arg name="gui" default="true" />
     <arg name="paused" default="false" />
-    <arg name="world_name" default="stage_1" />
+    <!-- <arg name="world_name" default="stage_4" /> -->
+    <arg name="world_name" default="stage_4" />
 
     <!-- <arg name="use_sim_time" default="true"/> -->
 
@@ -17,14 +18,24 @@
     <arg name="uav_name" default="firefly" />
     <arg name="ugv_name" default="arco" />
 
+    # scenario_1    3.0, -1.0 , 0.5, 0 , 0 , 3.1415
+    # scenario_4    -0.54, 1.97 , 1.32, 0.11 , -0.04 , 3.1415
+    # scenario_5    -2.0, 2.0 , 0.5, 0.0 , -0.0 , 3.1415
+    # thermal_central    6.88, 0.22 , 2.0 , 0.06, 0.243 , -3.1415
     <arg name="init_pos_x" default="3.0" />
     <arg name="init_pos_y" default="-1.0" />
-    <arg name="init_pos_z" default="0.0" />
-    <arg name="init_pos_th" default="3.1415" />
+    <arg name="init_pos_z" default="0.5" />
+    <arg name="init_pos_th_roll" default="0" />
+    <arg name="init_pos_th_pitch" default="-0" />
+    <arg name="init_pos_th_yaw" default="0" />
 
-    <arg name="dll_init_pos_x" default="18.0" />
-    <arg name="dll_init_pos_y" default="4.0" />
-    <arg name="dll_init_pos_z" default="0.3" />
+
+    # scenario_1    18.0, 4.0 , 0.3 , 3.1415
+    # scenario_5    14, 16 , 0.4, 0.0 , 0.0 , 3.1415
+    # thermal_central    52.53 , 27.37 , 3.53 , 0 
+    <arg name="dll_init_pos_x" default="18" />
+    <arg name="dll_init_pos_y" default="4" />
+    <arg name="dll_init_pos_z" default="0.4" />
     <arg name="dll_init_pos_th" default="3.1415" />
     <arg name="able_aloam_uav" default="false"/>
     <arg name="able_dll_uav" default="true"/>
@@ -37,7 +48,7 @@
     # ---------------------------------------------------Start Gazebo environment ---------------------------------------------------
     <!-- <param name="/use_sim_time" value="$(arg use_sim_time)"/> -->
     
-    <include file="$(find idmind_arco)/launch/empty_world.launch">
+    <include file="$(find marsupial_gazebo)/launch/empty_world.launch">
         <arg name="world_name" value="$(find marsupial_gazebo)/worlds/$(arg world_name).world" />
         <arg name="paused" value="$(arg paused)"/>
         <arg name="gui" value="$(arg gui)" />
@@ -47,7 +58,9 @@
 
     ## Spawn Model Gazebo
     <node name="marsupial_spawn" pkg="gazebo_ros" type="spawn_model"  args="-file $(find marsupial_description)/models/marsupial/marsupial.sdf -sdf -model marsupial
-                                                                        -x $(arg init_pos_x) -y $(arg init_pos_y) -z $(arg init_pos_z) -R 0 -P 0 -Y $(arg init_pos_th)" output="screen"/>
+                                                                        -x $(arg init_pos_x) -y $(arg init_pos_y) -z $(arg init_pos_z) -R $(arg init_pos_th_roll) -P $(arg init_pos_th_pitch) -Y $(arg init_pos_th_yaw)" output="screen"/>
+    <!-- <node name="marsupial_spawn" pkg="gazebo_ros" type="spawn_model" args="-file $(find marsupial_description)/models/marsupial/marsupial.sdf -sdf -model marsupial" output="screen">
+    </node> -->
 
     <include file="$(find marsupial_gazebo)/launch/marsupial_frames_simulation.launch">
         <arg name="ugv_name" value="$(arg ugv_name)"/>
@@ -129,16 +142,27 @@
 
         ## UAV Localization Stuff
         <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_dll" output="screen" if="$(arg able_dll_uav)"
-            args="0 marsupial_optimizer dll.launch robot_name:=$(arg uav_name) map:=$(arg world_name) 
+            args="2 marsupial_optimizer dll.launch robot_name:=$(arg uav_name) map:=$(arg world_name) 
             initial_x:=$(arg dll_init_pos_x) initial_y:=$(arg dll_init_pos_y) initial_z:=$(arg dll_init_pos_z) initial_a:=$(arg dll_init_pos_th) ">
         </node>
     
     </group>
 
     ## UAV Lidar Odometry Stuff
-    <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_aloam" output="screen" if="$(arg able_aloam_uav)"
+    <!-- <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_aloam" output="screen" if="$(arg able_aloam_uav)"
         args="10 marsupial_optimizer aloam.launch robot_name:=$(arg uav_name) only_odometry:=true">
+    </node> -->
+
+    <node pkg="upo_markers" type="marker_node" name="uav_marker_node" output="screen">
+        <param name="base_frame_id" value="$(arg uav_name)/base_link"/>
+        <param name="model" value="m100"/> <!-- m600 or m100 -->
+        <param name="color" value="0.0"/> 
+        <param name="color_r" value="0.0"/> 
+        <param name="color_g" value="0.0"/> 
+        <param name="color_b" value="0.0"/> 
+        <param name="scale" value="2.5"/>
     </node>
+
         
 </group>
         

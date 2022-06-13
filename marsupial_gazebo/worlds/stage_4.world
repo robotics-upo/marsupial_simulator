@@ -1,3 +1,5 @@
+<?xml version="1.0" ?>
+
 <sdf version='1.6'>
   <world name='default'>
     <light name='sun' type='directional'>
@@ -127,7 +129,8 @@
         <pose frame=''>1.43436 8.98537 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose frame=''>1.43436 8.98537 0 0 -0 0</pose>
+          <!-- <pose frame=''>1.43436 8.98537 0 0 -0 0</pose> -->
+          <pose frame=''>1.43436 0.0 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -149,13 +152,14 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>41.8434 -49.6438 22.8644 0 0.319643 2.1122</pose>
+        <pose frame=''>10.4124 17.4561 12.4554 0 0.4596 -2.2669</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
     </gui>
 
-    <plugin name='gazebo_octomap' filename='libBuildOctomapPlugin.so'/>
+    <!-- <plugin name='gazebo_octomap' filename='libBuildOctomapPlugin.so'/> -->
+    <plugin name="ros_interface_plugin" filename="librotors_gazebo_ros_interface_plugin.so"/>
 
   </world>
 </sdf>
