@@ -6,14 +6,14 @@
      <!-- <include>
       <uri>model://tether</uri> 
       <pose>-0.10 0 0.58 0.0 0.20 0</pose>
-    </include>  
+    </include>  -->
 
     <include>
       <uri>model://arco</uri>
-      <pose>0 0 0.18 0 0 0</pose>
+      <pose>0.16 0 0.0 0 0 0</pose>
     </include>
 
-     <joint name="marsupial/arco_tether_joint" type="fixed">
+    <!-- <joint name="marsupial/arco_tether_joint" type="fixed">
       <pose relative_to='tether::link_1'>0 0 -0.022 0 -0 0</pose>
       <parent>arco::base_platform</parent>
       <child>tether::link_1</child>
@@ -22,7 +22,7 @@
     <include>
       <!-- <uri>model://ardrone</uri>  -->
       <uri>model://firefly</uri> 
-      <pose>0.08 0 1.48 0 0</pose>
+      <pose>0.08 0 1.48 0 0 0</pose>
     </include> 
 
     <!-- <joint name="marsupial/tether_firefly_joint" type="fixed">

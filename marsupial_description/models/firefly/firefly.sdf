@@ -64,7 +64,7 @@
           <topicName>/firefly/os1_cloud_node/points</topicName>
           <frameName>/firefly/os1_sensor</frameName>
           <min_range>0.8</min_range>
-          <max_range>120.0</max_range>
+          <max_range>40.0</max_range>
           <gaussianNoise>0.03</gaussianNoise>
         </plugin>
         <pose>0 0 -0.036785 0 -0 0</pose>

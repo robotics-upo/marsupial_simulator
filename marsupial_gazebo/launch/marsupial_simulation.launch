@@ -5,12 +5,12 @@
     <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find rotors_gazebo)/models:$(find marsupial_description)/models/:$(find marsupial_gazebo)/models/"/>
     <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find rotors_gazebo)/models:$(find marsupial_description)/models/:$(find marsupial_gazebo)/models/"/>
 
-    <arg name="launch_ugv" default="false" />
+    <arg name="launch_ugv" default="true" />
     <arg name="launch_uav" default="true" />
     <arg name="gui" default="true" />
     <arg name="paused" default="false" />
     <!-- <arg name="world_name" default="stage_4" /> -->
-    <arg name="world_name" default="stage_4" />
+    <arg name="world_name" default="stage_1" />
 
     <!-- <arg name="use_sim_time" default="true"/> -->
 
@@ -27,7 +27,7 @@
     <arg name="init_pos_z" default="0.5" />
     <arg name="init_pos_th_roll" default="0" />
     <arg name="init_pos_th_pitch" default="-0" />
-    <arg name="init_pos_th_yaw" default="0" />
+    <arg name="init_pos_th_yaw" default="3.1415" />
 
 
     # scenario_1    18.0, 4.0 , 0.3 , 3.1415
@@ -53,11 +53,11 @@
         <arg name="paused" value="$(arg paused)"/>
         <arg name="gui" value="$(arg gui)" />
         <arg name="debug" value="false" />
-        <arg name="verbose" value="false" />
+        <arg name="verbose" value="true" />
     </include>
 
     ## Spawn Model Gazebo
-    <node name="marsupial_spawn" pkg="gazebo_ros" type="spawn_model"  args="-file $(find marsupial_description)/models/marsupial/marsupial.sdf -sdf -model marsupial
+    <node name="marsupial_spawn" pkg="gazebo_ros" type="spawn_model"  output="screen" args="-file $(find marsupial_description)/models/marsupial/marsupial.sdf -sdf -model marsupial
                                                                         -x $(arg init_pos_x) -y $(arg init_pos_y) -z $(arg init_pos_z) -R $(arg init_pos_th_roll) -P $(arg init_pos_th_pitch) -Y $(arg init_pos_th_yaw)" output="screen"/>
     <!-- <node name="marsupial_spawn" pkg="gazebo_ros" type="spawn_model" args="-file $(find marsupial_description)/models/marsupial/marsupial.sdf -sdf -model marsupial" output="screen">
     </node> -->
@@ -65,7 +65,7 @@
     <include file="$(find marsupial_gazebo)/launch/marsupial_frames_simulation.launch">
         <arg name="ugv_name" value="$(arg ugv_name)"/>
         <arg name="uav_name" value="$(arg uav_name)"/>
-        <arg name="able_frames_ugv" value="false"/>
+        <arg name="able_frames_ugv" value="true"/>
         <arg name="able_frames_uav" value="true"/>
     </include>
 
@@ -77,34 +77,34 @@
 
     <group ns="$(arg ugv_name)">
         <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_ugv_dll" output="screen"
-            args="15 marsupial_optimizer dll.launch robot_name:=$(arg ugv_name) map:=$(arg world_name) 
+            args="0 marsupial_launchers dll_simulation.launch robot_name:=$(arg ugv_name) map:=$(arg world_name) 
             initial_x:=$(arg dll_init_pos_x) initial_y:=$(arg dll_init_pos_y) initial_z:=$(arg dll_init_pos_z) initial_a:=$(arg dll_init_pos_th) ">
         </node>
 
         <!-- Start Diagnostics Aggreagator -->
-        <include file="$(find idmind_diagnostics)/launch/idmind_diagnostics.launch" />
+        <!-- <include file="$(find idmind_diagnostics)/launch/idmind_diagnostics.launch" /> -->
 
         <!-- Otherwise initiate sensors -->
-        <group unless="$(arg simulation)">
+        <!-- <group unless="$(arg simulation)">
             <include file="$(find idmind_imu)/launch/idmind_imu.launch">
                 <arg name="imu" value="razor" />
                 <arg name="tf_prefix" value="$(arg robot_name)/" />
             </include>
-        </group>
+        </group> -->
         
         <!-- Start sensors and actuators nodes -->
-        <include file="$(find idmind_sensorsboard)/launch/idmind_sensorsboard.launch">
+        <!-- <include file="$(find idmind_sensorsboard)/launch/idmind_sensorsboard.launch">
             <arg name="simulation" value="$(arg simulation)" />
-        </include>
+        </include> -->
 
         <!-- Start interface node -->
-        <include file="$(find idmind_interface)/launch/idmind_interface.launch">
-        </include>
+        <!-- <include file="$(find idmind_interface)/launch/idmind_interface.launch">
+        </include> -->
 
         <!-- Start idmind_teleop -->
-        <include file="$(find idmind_teleop)/launch/idmind_teleop.launch">
+        <!-- <include file="$(find idmind_teleop)/launch/idmind_teleop.launch">
             <arg name="cmd_vel_topic" default="idmind_motors/set_velocities" />
-        </include>
+        </include> -->
 
     </group>
 </group>
@@ -128,7 +128,7 @@
         
         ## UAV Joy Stuff
         <node pkg="joy" type="joy_node" name="joy_$(arg uav_name)" respawn="true" >
-            <param name="dev" type="string" value="/dev/input/js0" /> 
+            <param name="dev" type="string" value="/dev/input/js1" /> 
             <param name="deadzone" value="0.12" />
         </node>
 
@@ -142,7 +142,7 @@
 
         ## UAV Localization Stuff
         <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_dll" output="screen" if="$(arg able_dll_uav)"
-            args="2 marsupial_optimizer dll.launch robot_name:=$(arg uav_name) map:=$(arg world_name) 
+            args="0 marsupial_launchers dll_simulation.launch robot_name:=$(arg uav_name) map:=$(arg world_name) 
             initial_x:=$(arg dll_init_pos_x) initial_y:=$(arg dll_init_pos_y) initial_z:=$(arg dll_init_pos_z) initial_a:=$(arg dll_init_pos_th) ">
         </node>
     
