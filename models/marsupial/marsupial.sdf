@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+
+  <plugin
+    filename="ignition-gazebo-sensors-system"
+    name="ignition::gazebo::systems::Sensors">
+    <render_engine>ogre2</render_engine>
+  </plugin>
+
+  
+
+  <model name="tether_marsupial">
+    <include>
+      <uri>model://arco</uri>
+      <pose frame=''> 0 0 0.18 0 0 0</pose>
+    </include>
+
+     <!-- Ouster Configuration-->
+    <include>
+      <uri>velodyne_hdl32</uri>
+      <pose frame=''> 0.28 0 0.26 0 -0 0 </pose>
+    </include>
+    <joint name="velodyne_joint" type="fixed">
+      <child>velodyne::top</child>
+      <parent>arco::base_cover</parent>
+      <pose>0 0 0 0 0 0</pose>
+    </joint>
+
+     <!-- <include>
+      <uri>model://tether</uri> 
+      <pose>-0.10 0 0.58 0.0 0.20 0</pose>
+    </include>  
+
+     <include>
+      <uri>model://firefly</uri> 
+      <pose>0.08 0 1.48 0 0</pose>
+    </include> 
+
+     <joint name="marsupial/arco_tether_joint" type="fixed">
+      <pose relative_to='tether::link_1'>0 0 -0.022 0 -0 0</pose>
+      <parent>arco::base_platform</parent>
+      <child>tether::link_1</child>
+    </joint>  -->
+
+    <!-- <joint name="marsupial/tether_firefly_joint" type="fixed">
+      <pose relative_to='tether::link_40'>0 0 0.02 0 -0 0</pose>
+      <parent>ardrone::ardrone/base_link</parent>
+      <child>tether::link_40</child>
+    </joint>  -->
+  </model>
+
+</sdf>
+

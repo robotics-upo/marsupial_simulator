@@ -1,0 +1,2195 @@
+<?xml version='1.0'?>
+ <sdf version='1.5'>
+  <model name="tether">
+   <static>false</static>
+
+ 				<!-- DEFINITION OF LINKS -->
+
+
+    <link name='linking_1'>
+      <pose>0 0 0 0 0 0</pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia> 
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <link name='linking_2'>
+    <pose> 0 0 0.02 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_01_02" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_2</child>
+      <parent>linking_1</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+            <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_3'>
+      <pose>0 0 0.04 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_02_03" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_3</child>
+      <parent>linking_2</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_4'>
+      <pose>0 0 0.06 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_03_04" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_4</child>
+      <parent>linking_3</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_5'>
+      <pose>0 0 0.08 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_04_05" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_5</child>
+      <parent>linking_4</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_6'>
+      <pose>0 0 0.1 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_05_06" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_6</child>
+      <parent>linking_5</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_7'>
+      <pose>0 0 0.12 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_06_07" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_7</child>
+      <parent>linking_6</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_8'>
+      <pose>0 0 0.14 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_07_08" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_8</child>
+      <parent>linking_7</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_9'>
+      <pose>0 0 0.16 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_08_09" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_9</child>
+      <parent>linking_8</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_10'>
+      <pose>0 0 0.18 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_09_10" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_10</child>
+      <parent>linking_9</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_11'>
+      <pose>0 0 0.2 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_10_11" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_11</child>
+      <parent>linking_10</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_12'>
+      <pose>0 0 0.22 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_11_12" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_12</child>
+      <parent>linking_11</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_13'>
+      <pose>0 0 0.24 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_12_13" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_13</child>
+      <parent>linking_12</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_14'>
+      <pose>0 0 0.26 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_13_14" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_14</child>
+      <parent>linking_13</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_15'>
+      <pose>0 0 0.28 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_14_15" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_15</child>
+      <parent>linking_14</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_16'>
+      <pose>0 0 0.30 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_15_16" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_16</child>
+      <parent>linking_15</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_17'>
+      <pose>0 0 0.32 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_16_17" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_17</child>
+      <parent>linking_16</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_18'>
+      <pose>0 0 0.34 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_17_18" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_18</child>
+      <parent>linking_17</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_19'>
+      <pose>0 0 0.36 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_18_19" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_19</child>
+      <parent>linking_18</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_20'>
+      <pose>0 0 0.38 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_19_20" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_20</child>
+      <parent>linking_19</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_21'>
+      <pose>0 0 0.40 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_20_21" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_21</child>
+      <parent>linking_20</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_22'>
+      <pose>0 0 0.42 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_21_22" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_22</child>
+      <parent>linking_21</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_23'>
+      <pose>0 0 0.44 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_22_23" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_23</child>
+      <parent>linking_22</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_24'>
+      <pose>0 0 0.46 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_23_24" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_24</child>
+      <parent>linking_23</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_25'>
+      <pose>0 0 0.48 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_24_25" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_25</child>
+      <parent>linking_24</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_26'>
+      <pose>0 0 0.50 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_25_26" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_26</child>
+      <parent>linking_25</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_27'>
+      <pose>0 0 0.52 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_26_27" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_27</child>
+      <parent>linking_26</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_28'>
+      <pose>0 0 0.54 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_27_28" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_28</child>
+      <parent>linking_27</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_29'>
+      <pose>0 0 0.56 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_28_29" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_29</child>
+      <parent>linking_28</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_30'>
+      <pose>0 0 0.58 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_29_30" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_30</child>
+      <parent>linking_29</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_31'>
+      <pose>0 0 0.60 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_30_31" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_31</child>
+      <parent>linking_30</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_32'>
+      <pose>0 0 0.62 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_31_32" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_32</child>
+      <parent>linking_31</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_33'>
+      <pose>0 0 0.64 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_32_33" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_33</child>
+      <parent>linking_32</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_34'>
+      <pose>0 0 0.66 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_33_34" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_34</child>
+      <parent>linking_33</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_35'>
+      <pose>0 0 0.68 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_34_35" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_35</child>
+      <parent>linking_34</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_36'>
+      <pose>0 0 0.70 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_35_36" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_36</child>
+      <parent>linking_35</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_37'>
+      <pose>0 0 0.72 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_36_37" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_37</child>
+      <parent>linking_36</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_38'>
+      <pose>0 0 0.74 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_37_38" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_38</child>
+      <parent>linking_37</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_39'>
+      <pose>0 0 0.76 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_38_39" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_39</child>
+      <parent>linking_38</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+    <link name='linking_40'>
+      <pose>0 0 0.78 0 0 0 </pose>
+      
+      <inertial>
+        <mass>0.005000</mass>
+        <inertia>
+          <ixx>0.005000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.005000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.005000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.005</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+    </link>
+
+    <joint name="tether/joint_39_40" type="revolute">
+      <pose>0 0 -0.01 0 0 0</pose>
+      <child>linking_40</child>
+      <parent>linking_39</parent>
+      <axis>
+        <xyz>1 1 0</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>0.1000000</damping>
+          <!-- <friction>0.0100000</friction> -->
+        </dynamics> 
+      </axis>
+    </joint>
+
+  </model>
+</sdf> 
+
+

@@ -1,0 +1,561 @@
+<?xml version="1.0" ?>
+<sdf version='1.7'>
+  <model name='arco'>
+
+  <plugin name='publisher_frames_sdf_model_arco' filename='libpublisher_frames_sdf_model.so'>
+      <robotNamespace>arco</robotNamespace>
+      <linkNames>front_left front_right rear_left rear_right</linkNames>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <updateRate>50.0</updateRate>
+    </plugin>
+    
+    <pose>0.0 0 0.1 -0 0</pose>
+
+    <link name='base_link'>
+      <inertial>
+        <pose>0.0 0 0.0 -0 0</pose>
+        <mass>40.85</mass>
+        <inertia>
+          <ixx>2.083333</ixx>
+          <ixy>0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>2.083333</iyy>
+          <iyz>0</iyz>
+          <izz>2.816666</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose>0 0 0.07 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.66 0.38 0.14</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__cover_link_collision_1'>
+        <pose>0 0 0.14 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.66 0.64 0.01</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__uav_platform_collision_2'>
+        <pose>-0.1 0 0.29 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.56 0.3</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__imu_collision_3'>
+        <pose>0.12 0 0.1428 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.031 0.031 0.01</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__os1_sensor_base_link_collision_4'>
+        <pose>0.2795 0 0.17725 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.0717</length>
+            <radius>0.0516</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0.07 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.66 0.38 0.14</size>
+          </box>
+        </geometry>
+        <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__cover_link_visual_1'>
+        <pose>0 0 0.14 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.66 0.64 0.01</size>
+          </box>
+        </geometry>
+        <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Gray</name>
+            </script>
+            <ambient>1 1 1 1</ambient>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__uav_platform_visual_2'>
+        <pose>-0.1 0 0.29 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.56 0.3</size>
+          </box>
+        </geometry>
+        <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Gray</name>
+            </script>
+            <!-- <ambient>1 1 1 1</ambient> -->
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__imu_visual_3'>
+        <pose>0.12 0 0.1428 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://arco/meshes/razor_imu/razor_imu.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__os1_sensor_base_link_visual_4'>
+        <pose>0.2795 0 0.1414 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arco/meshes/VLP16/VLP16_base_1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__os1_sensor_base_link_visual_5'>
+        <pose>0.2795 0 0.1414 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arco/meshes/VLP16/VLP16_base_2.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__os1_sensor_visual_6'>
+        <pose>0.2795 0 0.1414 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://arco/meshes/VLP16/VLP16_scan.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <gravity>1</gravity>
+
+      <sensor name='imu_sensor' type='imu'>
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+        <visualize>1</visualize>
+        <topic>__default_topic__</topic>
+        <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+          <robotNamespace>arco</robotNamespace>
+          <topicName>imu</topicName>
+          <bodyName>imu</bodyName>
+          <updateRateHZ>20.0</updateRateHZ>
+          <gaussianNoise>0.0</gaussianNoise>
+          <xyzOffset>0 0 0</xyzOffset>
+          <rpyOffset>0 0 0</rpyOffset>
+          <frameName>imu</frameName>
+        </plugin>
+        <pose>0.12 0 0.1428 0 -0 0</pose>
+      </sensor>
+      
+      <sensor name='os1_sensor-VLP16' type='ray'>
+        <visualize>0</visualize>
+        <update_rate>10</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>1875</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.14159</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>16</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.261799</min_angle>
+              <max_angle>0.261799</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>131</max>
+            <resolution>0.001</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0</stddev>
+          </noise>
+        </ray>
+        <plugin name='gazebo_ros_laser_controller' filename='libgazebo_ros_velodyne_laser.so'>
+          <robotNamespace>arco</robotNamespace>
+          <topicName>os1_cloud_node/points</topicName>
+          <frameName>os1_sensor</frameName>
+          <organize_cloud>0</organize_cloud>
+          <min_range>0.9</min_range>
+          <max_range>130.0</max_range>
+          <gaussianNoise>0.008</gaussianNoise>
+        </plugin>
+        <pose>0.2795 0 0.1791 0 -0 0</pose>
+      </sensor>
+    </link>
+
+    <joint name='base_to_front_left' type='revolute'>
+      <pose relative_to='base_link'>0.2795 -0.24 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>front_left</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>1000</effort>
+          <velocity>75</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name='front_left'>
+      <pose relative_to='base_to_front_left'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 1.57 -0 0</pose>
+        <mass>0.5</mass>
+        <inertia>
+          <ixx>0.00149195</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00149195</iyy>
+          <iyz>0</iyz>
+          <izz>0.00257556</izz>
+        </inertia>
+      </inertial>
+      <collision name='front_left_collision'>
+        <pose>0 0 0 1.57 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.07</length>
+            <radius>0.1015</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <max_vel>0</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+            </ode>
+          </friction>
+        </surface>
+        <max_contacts>10</max_contacts>
+      </collision>
+      <visual name='front_left_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.002 0.002 0.002</scale>
+            <uri>model://arco/meshes/mecanum/mecanum_wheel_left.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Orange</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+      <gravity>1</gravity>
+    </link>
+
+    <joint name='base_to_front_right' type='revolute'>
+      <pose relative_to='base_link'>0.2795 0.24 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>front_right</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>1000</effort>
+          <velocity>75</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name='front_right'>
+      <pose relative_to='base_to_front_right'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 1.57 -0 0</pose>
+        <mass>0.5</mass>
+        <inertia>
+          <ixx>0.00149195</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00149195</iyy>
+          <iyz>0</iyz>
+          <izz>0.00257556</izz>
+        </inertia>
+      </inertial>
+      <collision name='front_right_collision'>
+        <pose>0 0 0 1.57 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.07</length>
+            <radius>0.1015</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <max_vel>0</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+            </ode>
+          </friction>
+        </surface>
+        <max_contacts>10</max_contacts>
+      </collision>
+      <visual name='front_right_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.002 0.002 0.002</scale>
+            <uri>model://arco/meshes/mecanum/mecanum_wheel_right.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Orange</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+      <gravity>1</gravity>
+    </link>
+
+    <joint name='base_to_rear_left' type='revolute'>
+      <pose relative_to='base_link'>-0.2795 -0.24 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>rear_left</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>1000</effort>
+          <velocity>75</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name='rear_left'>
+      <pose relative_to='base_to_rear_left'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 1.57 -0 0</pose>
+        <mass>0.5</mass>
+        <inertia>
+          <ixx>0.00149195</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00149195</iyy>
+          <iyz>0</iyz>
+          <izz>0.00257556</izz>
+        </inertia>
+      </inertial>
+      <collision name='rear_left_collision'>
+        <pose>0 0 0 1.57 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.07</length>
+            <radius>0.1015</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <max_vel>0</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+            </ode>
+          </friction>
+        </surface>
+        <max_contacts>10</max_contacts>
+      </collision>
+      <visual name='rear_left_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.002 0.002 0.002</scale>
+            <uri>model://arco/meshes/mecanum/mecanum_wheel_left.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Orange</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+      <gravity>1</gravity>
+    </link>
+
+    <joint name='base_to_rear_right' type='revolute'>
+      <pose relative_to='base_link'>-0.2795 0.24 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>rear_right</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>1000</effort>
+          <velocity>75</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name='rear_right'>
+      <pose relative_to='base_to_rear_right'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 1.57 -0 0</pose>
+        <mass>0.5</mass>
+        <inertia>
+          <ixx>0.00149195</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00149195</iyy>
+          <iyz>0</iyz>
+          <izz>0.00257556</izz>
+        </inertia>
+      </inertial>
+      <collision name='rear_right_collision'>
+        <pose>0 0 0 1.57 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.07</length>
+            <radius>0.1015</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <max_vel>0</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+            </ode>
+          </friction>
+        </surface>
+        <max_contacts>10</max_contacts>
+      </collision>
+      <visual name='rear_right_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.002 0.002 0.002</scale>
+            <uri>model://arco/meshes/mecanum/mecanum_wheel_right.STL</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Orange</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <velocity_decay>
+        <linear>0</linear>
+        <angular>0</angular>
+      </velocity_decay>
+      <self_collide>0</self_collide>
+      <gravity>1</gravity>
+    </link>
+
+    <static>0</static>
+    
+    <!-- <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'/> -->
+
+    <plugin name='robot_controller' filename='libgazebo_ros_planar_move_optional_tf.so'>
+      <robotNamespace>arco/</robotNamespace>
+      <commandTopic>idmind_motors/set_velocities</commandTopic>
+      <odometryTopic>idmind_motors/gazebo_odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryRate>20.0</odometryRate>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <publishTf>1</publishTf>
+      <marsupialConfig>1</marsupialConfig>
+    </plugin>
+
+  </model>
+</sdf>
