@@ -20,7 +20,7 @@
 #include <ignition/msgs.hh>
 #include <ignition/transport.hh>
 
-ignition::transport::v8::Node::Publisher pub;
+ignition::transport::v11::Node::Publisher pub;
 char *model_name = NULL;
 const char *global_frame = "world";
 ignition::msgs::Time t;

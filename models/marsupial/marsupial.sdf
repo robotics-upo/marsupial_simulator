@@ -7,8 +7,7 @@
     <render_engine>ogre2</render_engine>
   </plugin>
 
-  
-
+  <!-- <odom_publish_frequency>1</odom_publish_frequency> -->
   <model name="tether_marsupial">
     <include>
       <uri>model://arco</uri>
@@ -16,15 +15,7 @@
     </include>
 
      <!-- Ouster Configuration-->
-    <include>
-      <uri>velodyne_hdl32</uri>
-      <pose frame=''> 0.28 0 0.26 0 -0 0 </pose>
-    </include>
-    <joint name="velodyne_joint" type="fixed">
-      <child>velodyne::top</child>
-      <parent>arco::base_cover</parent>
-      <pose>0 0 0 0 0 0</pose>
-    </joint>
+    
 
      <!-- <include>
       <uri>model://tether</uri> 

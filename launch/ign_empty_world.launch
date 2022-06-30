@@ -49,17 +49,23 @@
         type="parameter_bridge"
         name="$(anon ros_ign_bridge)"
         output="screen"
-        args="os1_cloud_node/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked 
+        args="/os1_cloud_node/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked 
             /idmind_motors/set_velocities@geometry_msgs/Twist@ignition.msgs.Twist 
             /gt@tf2_msgs/TFMessage@ignition.msgs.Pose_V
+            /model/arco/tf@tf2_msgs/TFMessage@ignition.msgs.Pose_V
             /world/$(arg world_name)/pose/info@tf2_msgs/TFMessage@ignition.msgs.Pose_V
             /clock@rosgraph_msgs/Clock@ignition.msgs.Clock  
+            /world/default/model/arco/joint_state@sensor_msgs/JointState@ignition.msgs.Model
+            /model/arco/front_right/tf@tf2_msgs/TFMessage@ignition.msgs.Pose_V
             ">
-        <!-- <remap from="/model/arco/tf" to ="/tf"/> -->
+        <remap from="/model/arco/tf" to ="/tf"/>
         <remap from="/gt" to ="/tf"/>
+        <remap from="/world/default/model/arco/joint_state" to="/joint_states" />
     </node>
 
     # --------------------------------------------------- UGV Simulation ---------------------------------------------------
+
+    <node pkg="marsupial_simulator" type="ign_clock_publisher" name="ign_clock_publisher"/>
 
     <include file="$(find marsupial_simulator)/launch/marsupial_ugv_frames_simulation.launch">
         <arg name="ugv_name" value="$(arg ugv_name)"/>
@@ -70,12 +76,12 @@
     <include file="$(find idmind_diagnostics)/launch/idmind_diagnostics.launch" />
 
     # Otherwise initiate sensors
-    <group unless="$(arg simulation)">
+    <!-- <group unless="$(arg simulation)">
         <include file="$(find idmind_imu)/launch/idmind_imu.launch">
             <arg name="imu" value="razor" />
             <arg name="tf_prefix" value="$(arg robot_name)/" />
         </include>
-    </group>
+    </group> -->
         
     # Start sensors and actuators nodes
     <include file="$(find idmind_sensorsboard)/launch/idmind_sensorsboard.launch">
