@@ -45,4 +45,6 @@
     <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen"/>
   </group>
 
+  <node name="tf_base_uav" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 firefly/odometry_sensor1 firefly/base_link"/>
+
 </launch>
