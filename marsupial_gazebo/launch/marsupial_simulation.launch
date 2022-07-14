@@ -22,12 +22,8 @@
     <arg name="init_pos_z" default="0.0" />
     <arg name="init_pos_th" default="3.1415" />
 
-    <arg name="dll_init_pos_x" default="18.0" />
-    <arg name="dll_init_pos_y" default="4.0" />
-    <arg name="dll_init_pos_z" default="0.3" />
-    <arg name="dll_init_pos_th" default="3.1415" />
-    <arg name="able_aloam_uav" default="false"/>
-    <arg name="able_dll_uav" default="true"/>
+    
+    
 
     ## UGV Parameter Define real/simulation and controller type
     <arg name="simulation" value="true" />                                  <!-- Define if it will run on a robot or simulation -->
@@ -127,18 +123,11 @@
             <param name="axis_vel_x_" value="4" /> #axes y for node joy
         </node>
 
-        ## UAV Localization Stuff
-        <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_dll" output="screen" if="$(arg able_dll_uav)"
-            args="0 marsupial_optimizer dll.launch robot_name:=$(arg uav_name) map:=$(arg world_name) 
-            initial_x:=$(arg dll_init_pos_x) initial_y:=$(arg dll_init_pos_y) initial_z:=$(arg dll_init_pos_z) initial_a:=$(arg dll_init_pos_th) ">
-        </node>
+        <node name="tf_base_uav" pkg="tf2_ros" type="static_transform_publisher" args="0 0 0 0 0 0 firefly/odometry_sensor1 firefly/base_link"/>
     
     </group>
 
-    ## UAV Lidar Odometry Stuff
-    <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_aloam" output="screen" if="$(arg able_aloam_uav)"
-        args="10 marsupial_optimizer aloam.launch robot_name:=$(arg uav_name) only_odometry:=true">
-    </node>
+    
         
 </group>
         
