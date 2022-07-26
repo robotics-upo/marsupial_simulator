@@ -17,12 +17,14 @@
      <!-- Ouster Configuration-->
     
 
-     <!-- <include>
-      <uri>model://tether</uri> 
-      <pose>-0.10 0 0.58 0.0 0.20 0</pose>
+     <include>
+      <!-- <uri>model://ctu_cras_norlab_x500_sensor_config_2</uri>  -->
+      <uri>model://drone</uri> 
+      <!-- <uri>model://quad</uri>  -->
+      <pose frame=''> -0.1 0 1.0 0 0 0</pose>
     </include>  
 
-     <include>
+     <!-- <include>
       <uri>model://firefly</uri> 
       <pose>0.08 0 1.48 0 0</pose>
     </include> 

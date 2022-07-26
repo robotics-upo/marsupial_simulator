@@ -9,9 +9,8 @@
     ## UAV TFs
     <group if="$(arg able_frames_uav)">
         <group ns="$(arg uav_name)">
-            <node pkg="tf" type="static_transform_publisher" name="tf_$(arg uav_name)_imu" args="0.0 0.0 0.004645 0.0 0.0 0.0   $(arg uav_name)/base_link  $(arg uav_name)/imu 30"/>
-            <node pkg="tf" type="static_transform_publisher" name="tf_$(arg uav_name)_os1" args="0.2 0.0 0.05 0.0 0.0 0.0  $(arg uav_name)/base_link  $(arg uav_name)/os1_sensor 10"/>    
-            <node pkg="tf" type="static_transform_publisher" name="tf_$(arg uav_name)_lidar" args="0 0.0 0.03618 3.1416 0.0 0.0 $(arg uav_name)/os1_sensor $(arg uav_name)/os1_lidar 10"/>  
+            <node pkg="tf2_ros" type="static_transform_publisher" name="tf_$(arg uav_name)_imu" args="0 0 0.1 0 0 0 $(arg uav_name)/base_link  $(arg uav_name)/imu"/>
+            <node pkg="tf2_ros" type="static_transform_publisher" name="tf_$(arg uav_name)_os1" args="0.1 0 0.1 0 0 0 $(arg uav_name)/base_link  /marsupial/ctu_cras_norlab_x500_sensor_config_1/base_link/front_laser"/>  
         </group>
     </group>
 

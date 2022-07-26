@@ -84,7 +84,7 @@
         <always_on>1</always_on>
         <update_rate>1</update_rate>
         <visualize>true</visualize>
-        <topic>imu</topic>
+        <topic>arco/imu</topic>
       </sensor>
     </link>
 
@@ -352,7 +352,7 @@
       </visual>
       <sensor name='sensor' type='gpu_lidar'>
       <!-- <sensor name='gpu_lidar' type='gpu_radar'> -->
-          <topic>os1_cloud_node</topic>
+          <topic>arco/os1_cloud_node</topic>
           <pose>0 0 0.029335 0 0 0</pose>
           <update_rate>10</update_rate>
           <ray>
@@ -466,7 +466,7 @@
         <wheel_separation>0.42</wheel_separation>
         <wheel_radius>0.1015</wheel_radius>
         <odom_publish_frequency>100</odom_publish_frequency>
-        <topic>idmind_motors/set_velocities</topic>
+        <topic>arco/idmind_motors/set_velocities</topic>
         <!-- <odom_topic>odom</odom_topic>
         <tf_topic>base_link</tf_topic>
         <frame_id>arco/base_link</frame_id>
