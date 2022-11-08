@@ -9,26 +9,17 @@
 
   <!-- <odom_publish_frequency>1</odom_publish_frequency> -->
   <model name="tether_marsupial">
-    <include>
+    <!-- <include>
       <uri>model://arco</uri>
       <pose frame=''> 0 0 0.18 0 0 0</pose>
-    </include>
-
-     <!-- Ouster Configuration-->
-    
+    </include> -->
 
      <include>
-      <!-- <uri>model://ctu_cras_norlab_x500_sensor_config_2</uri>  -->
-      <uri>model://drone</uri> 
-      <!-- <uri>model://quad</uri>  -->
-      <pose frame=''> -0.1 0 1.0 0 0 0</pose>
+      <uri>model://x500</uri> 
+      <pose frame=''> -0.1 0 0.0 0 0 0</pose>
     </include>  
 
-     <!-- <include>
-      <uri>model://firefly</uri> 
-      <pose>0.08 0 1.48 0 0</pose>
-    </include> 
-
+    <!--
      <joint name="marsupial/arco_tether_joint" type="fixed">
       <pose relative_to='tether::link_1'>0 0 -0.022 0 -0 0</pose>
       <parent>arco::base_platform</parent>

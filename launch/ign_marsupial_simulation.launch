@@ -6,20 +6,22 @@
     ## Parameter
     <arg name="world_name" default="edifice"/>
     <arg name="model" default="marsupial/marsupial.sdf"/>
-    <arg name="uav_name" default="firefly" />
+    <arg name="uav_name" default="x500" />
     <arg name="ugv_name" default="arco" />
     #UGV Parameter Define real/simulation and controller type
     <arg name="simulation" value="true" />                                  <!-- Define if it will run on a robot or simulation -->
     # scenario_1    18.0, 4.0 , 0.3 , 3.1415
     # scenario_5    14, 16 , 0.4, 0.0 , 0.0 , 3.1415
     # thermal_central    52.53 , 27.37 , 3.53 , 0 
-    <arg name="dll_init_pos_x" default="18" />
-    <arg name="dll_init_pos_y" default="4" />
-    <arg name="dll_init_pos_z" default="0.4" />
-    <arg name="dll_init_pos_th" default="3.1415" />
+    <arg name="dll_init_pos_x" default="52.5" />
+    <arg name="dll_init_pos_y" default="16" />
+    <arg name="dll_init_pos_z" default="2.4" /> 
+    <arg name="dll_init_pos_z_uav" default="$(eval 0.35 + arg('dll_init_pos_z'))" />
+    <arg name="dll_init_pos_th" default="0.0" />
     <arg name="able_aloam_uav" default="false"/>
     <arg name="able_dll_uav" default="true"/>
-
+    <param name="use_sim_time" value="true"/>
+    <param name="pause" value="true"/>
 
     # --------------------------------------------------------------------- NODES --------------------------------------------------------------------- 
     
@@ -31,9 +33,9 @@
     </include>
 
      # Spawn the node. IMPORTANT: the world name must be the same as the filename of the world file
-    <arg name="x_pos" default="0 " />
-    <arg name="y_pos" default="0" />
-    <arg name="z_pos" default="0.4 " />
+    <arg name="x_pos" default="3 " />
+    <arg name="y_pos" default="-12" />
+    <arg name="z_pos" default="1.8 " />
     <node
         pkg="ros_ign_gazebo"
         type="create"
@@ -50,14 +52,20 @@
         name="$(anon ros_ign_bridge)"
         output="screen"
         args="
-            /arco/os1_cloud_node/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked 
-            /arco/imu@sensor_msgs/Imu@ignition.msgs.IMU
-            /arco/idmind_motors/set_velocities@geometry_msgs/Twist@ignition.msgs.Twist 
             /world/$(arg world_name)/pose/info@tf2_msgs/TFMessage@ignition.msgs.Pose_V
             /clock@rosgraph_msgs/Clock@ignition.msgs.Clock  
 
-            
+            /arco/os1_cloud_node/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked 
+            /arco/imu@sensor_msgs/Imu@ignition.msgs.IMU
+            /arco/idmind_motors/set_velocities@geometry_msgs/Twist@ignition.msgs.Twist 
+
+            /x500/os1_cloud_node/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked
+            /x500/imu@sensor_msgs/Imu@ignition.msgs.IMU
+            /model/x500/odometry@nav_msgs/Odometry@ignition.msgs.Odometry
+            /x500/gazebo/command/motor_speed@mav_msgs/Actuators@ignition.msgs.Actuators
             ">
+            <!-- /x500/gazebo/command/twist@geometry_msgs/Twist@ignition.msgs.Twist -->
+
             <!-- 
             /model/arco/tf@tf2_msgs/TFMessage@ignition.msgs.Pose_V
             /gt@tf2_msgs/TFMessage@ignition.msgs.Pose_V
@@ -66,19 +74,21 @@
         <!-- <remap from="/model/arco/tf" to ="/tf"/> -->   #Publish odom frame
         <!-- <remap from="/gt" to ="/tf"/> -->
         <!-- <remap from="/world/default/model/arco/joint_state" to="/joint_states" /> -->
+        <remap from="/x500/gazebo/command/motor_speed" to="/command/motor_speed" />
+        <remap from="/model/x500/odometry" to="/x500/odom" />
     </node>
 
     # --------------------------------------------------- UGV Simulation ---------------------------------------------------
 
     <node pkg="marsupial_simulator" type="ign_clock_publisher" name="ign_clock_publisher"/>
 
-    <include file="$(find marsupial_simulator)/launch/marsupial_ugv_frames_simulation.launch">
+    <!-- <include file="$(find marsupial_simulator)/launch/marsupial_ugv_frames_simulation.launch">
         <arg name="ugv_name" value="$(arg ugv_name)"/>
         <arg name="able_frames_ugv" value="true"/>
-    </include>
+    </include> -->
 
     # Start Diagnostics Aggreagator
-    <include file="$(find idmind_diagnostics)/launch/idmind_diagnostics.launch" />
+    <!-- <include file="$(find idmind_diagnostics)/launch/idmind_diagnostics.launch" /> -->
 
     # Otherwise initiate sensors
     <!-- <group unless="$(arg simulation)">
@@ -88,7 +98,7 @@
         </include>
     </group> -->
         
-    # Start sensors and actuators nodes
+    <!-- # Start sensors and actuators nodes
     <include file="$(find idmind_sensorsboard)/launch/idmind_sensorsboard.launch">
         <arg name="simulation" value="$(arg simulation)" />
     </include>
@@ -102,26 +112,52 @@
         <arg name="cmd_vel_topic" default="$(arg ugv_name)/idmind_motors/set_velocities" />
     </include>
 
-    <!-- <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_ugv_dll" output="screen"
-            args="0 marsupial_launchers dll_simulation.launch robot_name:=$(arg ugv_name) map:=$(arg world_name) 
-            initial_x:=$(arg dll_init_pos_x) initial_y:=$(arg dll_init_pos_y) initial_z:=$(arg dll_init_pos_z) initial_a:=$(arg dll_init_pos_th) ">
+    <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_ugv_dll" output="screen"
+            args="0 marsupial_launchers dll_simulation.launch robot_name:=$(arg ugv_name)
+            initial_x:=$(arg dll_init_pos_x) 
+            initial_y:=$(arg dll_init_pos_y) 
+            initial_z:=$(arg dll_init_pos_z) 
+            initial_a:=$(arg dll_init_pos_th) ">
     </node> -->
 
     # --------------------------------------------------- UAV Simulation ---------------------------------------------------
 
-
-
-    <!-- <include file="$(find marsupial_simulator)/launch/marsupial_uav_frames_simulation.launch">
+    <include file="$(find marsupial_simulator)/launch/marsupial_uav_frames_simulation.launch">
         <arg name="uav_name" value="$(arg uav_name)"/>
-        <arg name="able_frames_uav" value="false"/>
-    </include> -->
+        <arg name="able_frames_uav" value="true"/>
+    </include>
 
-    <!-- <node pkg="marsupial_simulator" type="ground_truth_pose_publisher" name="gt" args="$(arg world_name) arco world"/> -->
+    <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_dll" output="screen"
+            args="0 marsupial_launchers dll_simulation.launch robot_name:=$(arg uav_name) 
+            initial_x:=$(arg dll_init_pos_x) 
+            initial_y:=$(arg dll_init_pos_y) 
+            initial_z:=$(arg dll_init_pos_z_uav) 
+            initial_a:=$(arg dll_init_pos_th) ">
+    </node>
 
-  <!-- <node
-    type="rqt_topic"
-    name="rqt_topic"
-    pkg="rqt_topic"
-    args="-t" /> -->
+    ## UAV Control Stuff
+    <node name="roll_pitch_yawrate_thrust_controller_node" pkg="quadrotor_ign_controller" type="roll_pitch_yawrate_thrust_controller_node" output="screen">
+        <rosparam command="load" file="$(find quadrotor_ign_controller)/resources/roll_pitch_yawrate_thrust_controller_dji.yaml" />
+        <rosparam command="load" file="$(find quadrotor_ign_controller)/resources/dji.yaml"/>
+        <remap from="/odometry" to="/$(arg uav_name)/odom"/> # /laser_odom_to_init" loam
+    </node>
+
+    <node name="velocity_PID_controller" pkg="quadrotor_ign_controller" type="velocity_PID_controller" output="screen">
+        <remap from="odom" to="/$(arg uav_name)/odom"/> # /laser_odom_to_init" loam
+    </node>
+
+     ## UAV Joy Stuff
+    <node pkg="joy" type="joy_node" name="joy_node_$(arg uav_name)" respawn="true" >
+        <param name="dev" type="string" value="/dev/input/js1" /> 
+        <param name="deadzone" value="0.12" />
+    </node>
+
+    <node pkg="quadrotor_joy_interface" type="joy_vel" name="joy_interface_$(arg uav_name)" respawn="true" >
+            <param name="max_vel_x" value="1.0" /> 
+            <param name="max_vel_y" value="1.0" /> 
+            <param name="max_yaw_rate" value="1.0" /> 
+            <param name="axis_vel_y_" value="3" /> #axes x for node joy
+            <param name="axis_vel_x_" value="4" /> #axes y for node joy
+    </node>
 
 </launch>

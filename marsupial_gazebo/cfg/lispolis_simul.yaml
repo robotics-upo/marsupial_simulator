@@ -1,7 +1,0 @@
-init_pos_case_1:
-  ugv_x: -16.1
-  ugv_y: -3.5
-  ugv_z: 0.0
-  ugv_yaw:  0.5
-  ugv_pitch: 0.0
-  ugv_roll: 0.0

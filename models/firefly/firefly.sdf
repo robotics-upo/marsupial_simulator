@@ -1,20 +1,21 @@
 <?xml version="1.0" ?>
 <sdf version='1.7'>
   <model name='firefly'>
-    <link name='firefly/base_link'>
+
+    <link name='base_link'>
       <inertial>
-        <pose>0 0 -0.000242 0 -0 0</pose>
-        <mass>1.52</mass>
-        <inertia>
-          <ixx>0.0347717</ixx>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>2.5</mass>
+        <!-- <inertia>
+          <ixx>0.00347563</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.0459083</iyy>
+          <iyy>0.00458929</iyy>
           <iyz>0</iyz>
-          <izz>0.097702</izz>
-        </inertia>
+          <izz>0.00977</izz>
+        </inertia> -->
       </inertial>
-      <collision name='firefly/base_link_inertia_collision'>
+      <collision name='base_link_inertia_collision'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <box>
@@ -22,58 +23,27 @@
           </box>
         </geometry>
       </collision>
-      <visual name='firefly/base_link_inertia_visual'>
+      <visual name='base_link_inertia_visual'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://firefly/meshes//firefly.dae</uri>
+            <uri>meshes/firefly.dae</uri>
           </mesh>
         </geometry>
+        <material>
+          <ambient>1 0 0  1</ambient>
+          <diffuse>1 0.4 0 1</diffuse>
+          <specular>1 0.4 0  1</specular>
+          <emissive>0 0 0 1</emissive>
+        </material>
       </visual>
-      <sensor name='laser_scan' type='ray'>
-        <visualize>0</visualize>
-        <update_rate>10</update_rate>
-        <ray>
-          <scan>
-            <horizontal>
-              <samples>512</samples>
-              <resolution>1</resolution>
-              <min_angle>-3.14159</min_angle>
-              <max_angle>3.14159</max_angle>
-            </horizontal>
-            <vertical>
-              <samples>16</samples>
-              <resolution>1</resolution>
-              <min_angle>-0.289725</min_angle>
-              <max_angle>0.289725</max_angle>
-            </vertical>
-          </scan>
-          <range>
-            <min>0.8</min>
-            <max>120</max>
-            <resolution>0.012</resolution>
-          </range>
-          <noise>
-            <type>gaussian</type>
-            <mean>0</mean>
-            <stddev>0</stddev>
-          </noise>
-        </ray>
-        <plugin name='fireflygazebo_ros_laser_controller' filename='libgazebo_ros_velodyne_laser.so'>
-          <topicName>/firefly/os1_cloud_node/points</topicName>
-          <frameName>/firefly/os1_sensor</frameName>
-          <min_range>0.8</min_range>
-          <max_range>120.0</max_range>
-          <gaussianNoise>0.03</gaussianNoise>
-        </plugin>
-        <pose>0 0 -0.036785 0 -0 0</pose>
-      </sensor>
     </link>
-    <joint name='firefly/imu_joint' type='revolute'>
-      <pose relative_to='firefly/base_link'>0 0 0 0 -0 0</pose>
-      <parent>firefly/base_link</parent>
-      <child>firefly/imu_link</child>
+
+    <joint name='imu_joint' type='revolute'>
+      <pose relative_to='base_link'>0 0 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>imu_link</child>
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
@@ -88,8 +58,9 @@
         </dynamics>
       </axis>
     </joint>
-    <link name='firefly/imu_link'>
-      <pose relative_to='firefly/imu_joint'>0 0 0 0 -0 0</pose>
+
+    <link name='imu_link'>
+      <pose relative_to='imu_joint'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
         <mass>0.015</mass>
@@ -103,10 +74,10 @@
         </inertia>
       </inertial>
     </link>
-    <joint name='firefly/odometry_sensor1_joint' type='revolute'>
-      <pose relative_to='firefly/base_link'>0 0 0 0 -0 0</pose>
-      <parent>firefly/base_link</parent>
-      <child>firefly/odometry_sensor1_link</child>
+    <joint name='imugt_joint' type='revolute'>
+      <pose relative_to='base_link'>0 0 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>imugt_link</child>
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
@@ -121,8 +92,8 @@
         </dynamics>
       </axis>
     </joint>
-    <link name='firefly/odometry_sensor1_link'>
-      <pose relative_to='firefly/odometry_sensor1_joint'>0 0 0 0 -0 0</pose>
+    <link name='imugt_link'>
+      <pose relative_to='imugt_joint'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
         <mass>1e-05</mass>
@@ -136,10 +107,44 @@
         </inertia>
       </inertial>
     </link>
-    <joint name='firefly/rotor_0_joint' type='revolute'>
-      <pose relative_to='firefly/base_link'>0.186195 0.1075 0.037 0 -0 0</pose>
-      <parent>firefly/base_link</parent>
-      <child>firefly/rotor_0</child>
+    <joint name='odometry_sensorgt_joint' type='revolute'>
+      <pose relative_to='base_link'>0 0 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>odometry_sensorgt_link</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='odometry_sensorgt_link'>
+      <pose relative_to='odometry_sensorgt_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>1e-05</mass>
+        <inertia>
+          <ixx>1e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-05</iyy>
+          <iyz>0</iyz>
+          <izz>1e-05</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <joint name='rotor_0_joint' type='revolute'>
+      <pose relative_to='base_link'>0.186195 0.1075 0.037 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>rotor_0</child>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -152,8 +157,8 @@
         </dynamics>
       </axis>
     </joint>
-    <link name='firefly/rotor_0'>
-      <pose relative_to='firefly/rotor_0_joint'>0 0 0 0 -0 0</pose>
+    <link name='rotor_0'>
+      <pose relative_to='rotor_0_joint'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
         <mass>0.005</mass>
@@ -166,7 +171,7 @@
           <izz>4.26041e-05</izz>
         </inertia>
       </inertial>
-      <collision name='firefly/rotor_0_collision'>
+      <collision name='rotor_0_collision'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <cylinder>
@@ -183,26 +188,27 @@
           </friction>
         </surface>
       </collision>
-      <visual name='firefly/rotor_0_visual'>
+      <visual name='rotor_0_visual'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
             <scale>0.1 0.1 0.1</scale>
-            <uri>model://firefly/meshes//propeller_ccw.dae</uri>
+            <uri>meshes/propeller_ccw.dae</uri>
           </mesh>
         </geometry>
         <material>
-          <script>
-            <name>Gazebo/Red</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
+          <ambient>1 0 1 1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+          <specular>1 0 0  1</specular>
+          <emissive>1 0 0 1</emissive>
         </material>
       </visual>
     </link>
-    <joint name='firefly/rotor_1_joint' type='revolute'>
-      <pose relative_to='firefly/base_link'>0 0.215 0.037 0 -0 0</pose>
-      <parent>firefly/base_link</parent>
-      <child>firefly/rotor_1</child>
+
+    <joint name='rotor_1_joint' type='revolute'>
+      <pose relative_to='base_link'>0 0.215 0.037 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>rotor_1</child>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -215,8 +221,8 @@
         </dynamics>
       </axis>
     </joint>
-    <link name='firefly/rotor_1'>
-      <pose relative_to='firefly/rotor_1_joint'>0 0 0 0 -0 0</pose>
+    <link name='rotor_1'>
+      <pose relative_to='rotor_1_joint'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
         <mass>0.005</mass>
@@ -229,7 +235,7 @@
           <izz>4.26041e-05</izz>
         </inertia>
       </inertial>
-      <collision name='firefly/rotor_1_collision'>
+      <collision name='rotor_1_collision'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <cylinder>
@@ -246,26 +252,27 @@
           </friction>
         </surface>
       </collision>
-      <visual name='firefly/rotor_1_visual'>
+      <visual name='rotor_1_visual'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
             <scale>0.1 0.1 0.1</scale>
-            <uri>model://firefly/meshes//propeller_cw.dae</uri>
+            <uri>meshes/propeller_cw.dae</uri>
           </mesh>
         </geometry>
         <material>
-          <script>
-            <name>Gazebo/Blue</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
+          <ambient>1 0 0  1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+          <specular>1 0 0  1</specular>
+          <emissive>0 0 0 1</emissive>
         </material>
       </visual>
     </link>
-    <joint name='firefly/rotor_2_joint' type='revolute'>
-      <pose relative_to='firefly/base_link'>-0.186195 0.1075 0.037 0 -0 0</pose>
-      <parent>firefly/base_link</parent>
-      <child>firefly/rotor_2</child>
+
+    <joint name='rotor_2_joint' type='revolute'>
+      <pose relative_to='base_link'>-0.186195 0.1075 0.037 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>rotor_2</child>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -278,8 +285,8 @@
         </dynamics>
       </axis>
     </joint>
-    <link name='firefly/rotor_2'>
-      <pose relative_to='firefly/rotor_2_joint'>0 0 0 0 -0 0</pose>
+    <link name='rotor_2'>
+      <pose relative_to='rotor_2_joint'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
         <mass>0.005</mass>
@@ -292,7 +299,7 @@
           <izz>4.26041e-05</izz>
         </inertia>
       </inertial>
-      <collision name='firefly/rotor_2_collision'>
+      <collision name='rotor_2_collision'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <cylinder>
@@ -309,26 +316,27 @@
           </friction>
         </surface>
       </collision>
-      <visual name='firefly/rotor_2_visual'>
+      <visual name='rotor_2_visual'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
             <scale>0.1 0.1 0.1</scale>
-            <uri>model://firefly/meshes//propeller_ccw.dae</uri>
+            <uri>meshes/propeller_ccw.dae</uri>
           </mesh>
         </geometry>
         <material>
-          <script>
-            <name>Gazebo/Blue</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
+          <ambient>1 0 0  1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+          <specular>1 0 0  1</specular>
+          <emissive>0 0 0 1</emissive>
         </material>
       </visual>
     </link>
-    <joint name='firefly/rotor_3_joint' type='revolute'>
-      <pose relative_to='firefly/base_link'>-0.186195 -0.1075 0.037 0 -0 0</pose>
-      <parent>firefly/base_link</parent>
-      <child>firefly/rotor_3</child>
+
+    <joint name='rotor_3_joint' type='revolute'>
+      <pose relative_to='base_link'>-0.186195 -0.1075 0.037 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>rotor_3</child>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -341,8 +349,8 @@
         </dynamics>
       </axis>
     </joint>
-    <link name='firefly/rotor_3'>
-      <pose relative_to='firefly/rotor_3_joint'>0 0 0 0 -0 0</pose>
+    <link name='rotor_3'>
+      <pose relative_to='rotor_3_joint'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
         <mass>0.005</mass>
@@ -355,7 +363,7 @@
           <izz>4.26041e-05</izz>
         </inertia>
       </inertial>
-      <collision name='firefly/rotor_3_collision'>
+      <collision name='rotor_3_collision'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <cylinder>
@@ -372,26 +380,27 @@
           </friction>
         </surface>
       </collision>
-      <visual name='firefly/rotor_3_visual'>
+      <visual name='rotor_3_visual'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
             <scale>0.1 0.1 0.1</scale>
-            <uri>model://firefly/meshes//propeller_cw.dae</uri>
+            <uri>meshes/propeller_cw.dae</uri>
           </mesh>
         </geometry>
         <material>
-          <script>
-            <name>Gazebo/Blue</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
+          <ambient>1 0 0  1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+          <specular>1 0 0  1</specular>
+          <emissive>0 0 0 1</emissive>
         </material>
       </visual>
     </link>
-    <joint name='firefly/rotor_4_joint' type='revolute'>
-      <pose relative_to='firefly/base_link'>0 -0.215 0.037 0 -0 0</pose>
-      <parent>firefly/base_link</parent>
-      <child>firefly/rotor_4</child>
+
+    <joint name='rotor_4_joint' type='revolute'>
+      <pose relative_to='base_link'>0 -0.215 0.037 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>rotor_4</child>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -404,8 +413,8 @@
         </dynamics>
       </axis>
     </joint>
-    <link name='firefly/rotor_4'>
-      <pose relative_to='firefly/rotor_4_joint'>0 0 0 0 -0 0</pose>
+    <link name='rotor_4'>
+      <pose relative_to='rotor_4_joint'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
         <mass>0.005</mass>
@@ -418,7 +427,7 @@
           <izz>4.26041e-05</izz>
         </inertia>
       </inertial>
-      <collision name='firefly/rotor_4_collision'>
+      <collision name='rotor_4_collision'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <cylinder>
@@ -435,26 +444,27 @@
           </friction>
         </surface>
       </collision>
-      <visual name='firefly/rotor_4_visual'>
+      <visual name='rotor_4_visual'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
             <scale>0.1 0.1 0.1</scale>
-            <uri>model://firefly/meshes//propeller_ccw.dae</uri>
+            <uri>meshes/propeller_ccw.dae</uri>
           </mesh>
         </geometry>
         <material>
-          <script>
-            <name>Gazebo/Blue</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
+          <ambient>1 0 0  1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+          <specular>1 0 0  1</specular>
+          <emissive>0 0 0 1</emissive>
         </material>
       </visual>
     </link>
-    <joint name='firefly/rotor_5_joint' type='revolute'>
-      <pose relative_to='firefly/base_link'>0.186195 -0.1075 0.037 0 -0 0</pose>
-      <parent>firefly/base_link</parent>
-      <child>firefly/rotor_5</child>
+
+    <joint name='rotor_5_joint' type='revolute'>
+      <pose relative_to='base_link'>0.186195 -0.1075 0.037 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>rotor_5</child>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -467,8 +477,8 @@
         </dynamics>
       </axis>
     </joint>
-    <link name='firefly/rotor_5'>
-      <pose relative_to='firefly/rotor_5_joint'>0 0 0 0 -0 0</pose>
+    <link name='rotor_5'>
+      <pose relative_to='rotor_5_joint'>0 0 0 0 -0 0</pose>
       <inertial>
         <pose>0 0 0 0 -0 0</pose>
         <mass>0.005</mass>
@@ -481,7 +491,7 @@
           <izz>4.26041e-05</izz>
         </inertia>
       </inertial>
-      <collision name='firefly/rotor_5_collision'>
+      <collision name='rotor_5_collision'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <cylinder>
@@ -498,179 +508,155 @@
           </friction>
         </surface>
       </collision>
-      <visual name='firefly/rotor_5_visual'>
+      <visual name='rotor_5_visual'>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
             <scale>0.1 0.1 0.1</scale>
-            <uri>model://firefly/meshes//propeller_cw.dae</uri>
+            <uri>meshes/propeller_cw.dae</uri>
           </mesh>
         </geometry>
         <material>
-          <script>
-            <name>Gazebo/Red</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
+          <ambient>1 0 1 1</ambient>
+          <diffuse>1 0 0 1</diffuse>
+          <specular>1 0 0  1</specular>
+          <emissive>1 0 0 1</emissive>
         </material>
       </visual>
     </link>
-    <plugin name='multirotor_base_plugin' filename='librotors_gazebo_multirotor_base_plugin.so'>
-      <robotNamespace>firefly</robotNamespace>
-      <linkName>firefly/base_link</linkName>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
-    <plugin name='firefly_front_left_motor_model' filename='librotors_gazebo_motor_model.so'>
-      <robotNamespace>firefly</robotNamespace>
-      <jointName>firefly/rotor_0_joint</jointName>
-      <linkName>firefly/rotor_0</linkName>
-      <turningDirection>ccw</turningDirection>
-      <timeConstantUp>0.0125</timeConstantUp>
-      <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>838</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
-      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
-      <motorNumber>0</motorNumber>
-      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
-      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
-      <motorSpeedPubTopic>motor_speed/0</motorSpeedPubTopic>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
-    <plugin name='firefly_left_motor_model' filename='librotors_gazebo_motor_model.so'>
-      <robotNamespace>firefly</robotNamespace>
-      <jointName>firefly/rotor_1_joint</jointName>
-      <linkName>firefly/rotor_1</linkName>
-      <turningDirection>cw</turningDirection>
-      <timeConstantUp>0.0125</timeConstantUp>
-      <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>838</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
-      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
-      <motorNumber>1</motorNumber>
-      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
-      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
-      <motorSpeedPubTopic>motor_speed/1</motorSpeedPubTopic>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
-    <plugin name='firefly_back_left_motor_model' filename='librotors_gazebo_motor_model.so'>
-      <robotNamespace>firefly</robotNamespace>
-      <jointName>firefly/rotor_2_joint</jointName>
-      <linkName>firefly/rotor_2</linkName>
-      <turningDirection>ccw</turningDirection>
-      <timeConstantUp>0.0125</timeConstantUp>
-      <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>838</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
-      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
-      <motorNumber>2</motorNumber>
-      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
-      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
-      <motorSpeedPubTopic>motor_speed/2</motorSpeedPubTopic>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
-    <plugin name='firefly_back_right_motor_model' filename='librotors_gazebo_motor_model.so'>
-      <robotNamespace>firefly</robotNamespace>
-      <jointName>firefly/rotor_3_joint</jointName>
-      <linkName>firefly/rotor_3</linkName>
-      <turningDirection>cw</turningDirection>
-      <timeConstantUp>0.0125</timeConstantUp>
-      <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>838</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
-      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
-      <motorNumber>3</motorNumber>
-      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
-      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
-      <motorSpeedPubTopic>motor_speed/3</motorSpeedPubTopic>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
-    <plugin name='firefly_right_motor_model' filename='librotors_gazebo_motor_model.so'>
-      <robotNamespace>firefly</robotNamespace>
-      <jointName>firefly/rotor_4_joint</jointName>
-      <linkName>firefly/rotor_4</linkName>
-      <turningDirection>ccw</turningDirection>
-      <timeConstantUp>0.0125</timeConstantUp>
-      <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>838</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
-      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
-      <motorNumber>4</motorNumber>
-      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
-      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
-      <motorSpeedPubTopic>motor_speed/4</motorSpeedPubTopic>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
-    <plugin name='firefly_front_right_motor_model' filename='librotors_gazebo_motor_model.so'>
-      <robotNamespace>firefly</robotNamespace>
-      <jointName>firefly/rotor_5_joint</jointName>
-      <linkName>firefly/rotor_5</linkName>
-      <turningDirection>cw</turningDirection>
-      <timeConstantUp>0.0125</timeConstantUp>
-      <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>838</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
-      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
-      <motorNumber>5</motorNumber>
-      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
-      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
-      <motorSpeedPubTopic>motor_speed/5</motorSpeedPubTopic>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
-    <plugin name='controller_interface' filename='librotors_gazebo_controller_interface.so'>
-      <robotNamespace>firefly</robotNamespace>
-      <commandAttitudeThrustSubTopic>command/attitude</commandAttitudeThrustSubTopic>
-      <commandRateThrustSubTopic>command/rate</commandRateThrustSubTopic>
-      <commandMotorSpeedSubTopic>command/motor_speed</commandMotorSpeedSubTopic>
-      <imuSubTopic>imu</imuSubTopic>
-      <motorSpeedCommandPubTopic>gazebo/command/motor_speed</motorSpeedCommandPubTopic>
-    </plugin>
-    <plugin name='rotors_gazebo_imu_plugin' filename='librotors_gazebo_imu_plugin.so'>
-      <robotNamespace>firefly</robotNamespace>
-      <linkName>firefly/imu_link</linkName>
-      <imuTopic>imu</imuTopic>
-      <gyroscopeNoiseDensity>0.0003394</gyroscopeNoiseDensity>
-      <gyroscopeRandomWalk>3.8785e-05</gyroscopeRandomWalk>
-      <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime>
-      <gyroscopeTurnOnBiasSigma>0.0087</gyroscopeTurnOnBiasSigma>
-      <accelerometerNoiseDensity>0.004</accelerometerNoiseDensity>
-      <accelerometerRandomWalk>0.006</accelerometerRandomWalk>
-      <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
-      <accelerometerTurnOnBiasSigma>0.196</accelerometerTurnOnBiasSigma>
-    </plugin>
+
+    
     <static>0</static>
-    <plugin name='odometry_sensor1' filename='librotors_gazebo_odometry_plugin.so'>
-      <linkName>firefly/odometry_sensor1_link</linkName>
-      <robotNamespace>firefly</robotNamespace>
-      <poseTopic>pose</poseTopic>
-      <poseWithCovarianceTopic>pose_with_covariance</poseWithCovarianceTopic>
-      <positionTopic>ground_truth/position</positionTopic>
-      <transformTopic>ground_truth/transform</transformTopic>
-      <odometryTopic>ground_truth/odometry</odometryTopic>
-      <parentFrameId>world</parentFrameId>
-      <childFrameId>firefly/odometry_sensor1</childFrameId>
-      <measurementDivisor>1</measurementDivisor>
-      <measurementDelay>0</measurementDelay>
-      <unknownDelay>0.0</unknownDelay>
-      <noiseNormalPosition>0 0 0</noiseNormalPosition>
-      <noiseNormalQuaternion>0 0 0</noiseNormalQuaternion>
-      <noiseNormalLinearVelocity>0 0 0</noiseNormalLinearVelocity>
-      <noiseNormalAngularVelocity>0 0 0</noiseNormalAngularVelocity>
-      <noiseUniformPosition>0 0 0</noiseUniformPosition>
-      <noiseUniformQuaternion>0 0 0</noiseUniformQuaternion>
-      <noiseUniformLinearVelocity>0 0 0</noiseUniformLinearVelocity>
-      <noiseUniformAngularVelocity>0 0 0</noiseUniformAngularVelocity>
+    <frame name='base_joint' attached_to='base_link'>
+      <pose>0 0 0 0 -0 0</pose>
+    </frame>
+
+  
+    
+    <plugin filename="ignition-gazebo-multicopter-motor-model-system"
+        name="ignition::gazebo::systems::MulticopterMotorModel">
+        <robotNamespace>firefly</robotNamespace>
+        <jointName>rotor_3_joint</jointName>
+        <linkName>rotor_3</linkName>
+        <turningDirection>cw</turningDirection>
+        <timeConstantUp>0.0182</timeConstantUp>
+        <timeConstantDown>0.0182</timeConstantDown>
+        <maxRotVelocity>1000.0</maxRotVelocity>
+        <motorConstant>1.269e-05</motorConstant>
+        <momentConstant>0.016754</momentConstant>
+        <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+        <motorNumber>3</motorNumber>
+        <rotorDragCoefficient>2.0673e-04</rotorDragCoefficient>
+        <rollingMomentCoefficient>0</rollingMomentCoefficient>
+        <motorSpeedPubTopic>motor_speed/3</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>2</rotorVelocitySlowdownSim>
+        <motorType>velocity</motorType>
+     </plugin>
+     <plugin filename="ignition-gazebo-multicopter-motor-model-system"
+        name="ignition::gazebo::systems::MulticopterMotorModel">
+        <robotNamespace>firefly</robotNamespace>
+        <jointName>rotor_4_joint</jointName>
+        <linkName>rotor_4</linkName>
+        <turningDirection>ccw</turningDirection>
+        <timeConstantUp>0.0182</timeConstantUp>
+        <timeConstantDown>0.0182</timeConstantDown>
+        <maxRotVelocity>1000.0</maxRotVelocity>
+        <motorConstant>1.269e-05</motorConstant>
+        <momentConstant>0.016754</momentConstant>
+        <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+        <motorNumber>4</motorNumber>
+        <rotorDragCoefficient>2.0673e-04</rotorDragCoefficient>
+        <rollingMomentCoefficient>0</rollingMomentCoefficient>
+        <motorSpeedPubTopic>motor_speed/4</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>2</rotorVelocitySlowdownSim>
+        <motorType>velocity</motorType>
+      </plugin>
+    <plugin filename="ignition-gazebo-multicopter-motor-model-system"
+        name="ignition::gazebo::systems::MulticopterMotorModel">
+        <robotNamespace>firefly</robotNamespace>
+        <jointName>rotor_5_joint</jointName>
+        <linkName>rotor_5</linkName>
+        <turningDirection>cw</turningDirection>
+        <timeConstantUp>0.0182</timeConstantUp>
+        <timeConstantDown>0.0182</timeConstantDown>
+        <maxRotVelocity>1000.0</maxRotVelocity>
+        <motorConstant>1.269e-05</motorConstant>
+        <momentConstant>0.016754</momentConstant>
+        <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+        <motorNumber>5</motorNumber>
+        <rotorDragCoefficient>2.0673e-04</rotorDragCoefficient>
+        <rollingMomentCoefficient>0</rollingMomentCoefficient>
+        <motorSpeedPubTopic>motor_speed/5</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>2</rotorVelocitySlowdownSim>
+        <motorType>velocity</motorType>
     </plugin>
-    <plugin name='hector_gazebo_ros_gps' filename="libhector_gazebo_ros_gps.so">
-      <updateRate>5.0</updateRate>
-      <robotNamespace>firefly</robotNamespace>
-      <bodyName>firefly/base_link</bodyName>
-      <robotBaseFrame>base_link</robotBaseFrame>
-      <topicName>gps</topicName>
-    </plugin>
+
+    <plugin
+        filename="ignition-gazebo-multicopter-control-system"
+        name="ignition::gazebo::systems::MulticopterVelocityControl">
+        <robotNamespace>firefly</robotNamespace>
+        <commandSubTopic>gazebo/command/twist</commandSubTopic>
+        <enableSubTopic>enable</enableSubTopic>
+        <comLinkName>base_link</comLinkName>
+        <velocityGain>6 6 10</velocityGain>
+        <attitudeGain>4 4 2</attitudeGain>
+        <angularRateGain>0.7 0.7 0.7</angularRateGain>
+        <maximumLinearAcceleration>1 1 2</maximumLinearAcceleration>
+        <maximumLinearVelocity>5 5 5</maximumLinearVelocity>
+        <maximumAngularVelocity>3 3 3</maximumAngularVelocity>
+        <linearVelocityNoiseMean>0 0 0</linearVelocityNoiseMean>
+        <!-- linearVelocityNoiseStdDev based on error values reported in the paper Shen et. al., -->
+        <!-- Vision-Based State Estimation and Trajectory Control Towards High-Speed Flight with a Quadrotor -->
+        <!-- http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.490.7958&rep=rep1&type=pdf -->
+        <linearVelocityNoiseStdDev>0.1105 0.1261 0.0947</linearVelocityNoiseStdDev>
+        <angularVelocityNoiseMean>0 0 0</angularVelocityNoiseMean>
+        <!-- angularVelocityNoiseStdDev values based on ADIS16448's Rate Noise Density with a sample  -->
+        <!-- time of 0.004 ms. -->
+        <angularVelocityNoiseStdDev>0.004 0.004 0.004</angularVelocityNoiseStdDev>
+
+        <rotorConfiguration>
+          <rotor>
+            <jointName>rotor_0_joint</jointName>
+            <forceConstant>1.269e-05</forceConstant>
+            <momentConstant>1.6754e-2</momentConstant>
+            <direction>1</direction>
+          </rotor>
+          <rotor>
+            <jointName>rotor_1_joint</jointName>
+            <forceConstant>1.269e-05</forceConstant>
+            <momentConstant>1.6754e-2</momentConstant>
+            <direction>-1</direction>
+          </rotor>
+          <rotor>
+            <jointName>rotor_2_joint</jointName>
+            <forceConstant>1.269e-05</forceConstant>
+            <momentConstant>1.6754e-2</momentConstant>
+            <direction>1</direction>
+          </rotor>
+          <rotor>
+            <jointName>rotor_3_joint</jointName>
+            <forceConstant>1.269e-05</forceConstant>
+            <momentConstant>1.6754e-2</momentConstant>
+            <direction>-1</direction>
+          </rotor>
+          <rotor>
+            <jointName>rotor_4_joint</jointName>
+            <forceConstant>1.269e-05</forceConstant>
+            <momentConstant>1.6754e-2</momentConstant>
+            <direction>1</direction>
+          </rotor>
+          <rotor>
+            <jointName>rotor_5_joint</jointName>
+            <forceConstant>1.269e-05</forceConstant>
+            <momentConstant>1.6754e-2</momentConstant>
+            <direction>-1</direction>
+          </rotor>
+        </rotorConfiguration>
+      </plugin>
+      <plugin
+        filename="ignition-gazebo-odometry-publisher-system"
+        name="ignition::gazebo::systems::OdometryPublisher">
+        <dimensions>3</dimensions>
+      </plugin>
   </model>
 </sdf>

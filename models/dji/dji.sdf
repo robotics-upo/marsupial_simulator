@@ -4,27 +4,27 @@
   <model name='dji'>
   <static>false</static>
 
-    <link name='dji/base_link'>
+    <link name='base_link'>
       <pose>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>1.5</mass>
-        <inertia>
+        <!-- <inertia>
           <ixx>0.0347563</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
           <iyy>0.0458929</iyy>
           <iyz>0</iyz>
           <izz>0.0977</izz>
-        </inertia>
-        <!-- <inertia>
-          <ixx>0.000162</ixx>
+        </inertia> -->
+        <inertia>
+          <ixx>0.00162</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000162</iyy>
+          <iyy>0.00162</iyy>
           <iyz>0</iyz>
-          <izz>0,0010125</izz>
-        </inertia> -->
+          <izz>0.0010125</izz>
+        </inertia>
       </inertial>
       <collision name='base_link_inertia_collision'>
         <pose>0 0 0.014 0 0 0</pose>
@@ -50,8 +50,49 @@
             <ambient>0.5 0.5 0.5 0.9</ambient>
         </material>
       </visual>
+      <sensor name="os1_sensor" type="gpu_lidar">
+        <topic>dji/os1_cloud_node</topic>
+        <pose>0 0 0.0944 0 0 0</pose>
+        <update_rate>20</update_rate>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>1024</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.14159</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>64</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.785398163397</min_angle>
+              <max_angle>0.785398163397</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>50</max>
+            <resolution>0.003</resolution>
+          </range>
+          <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.03</stddev>
+          </noise>
+        </lidar>
+      </sensor>
+      <visual name='base_link_os1'>
+        <pose>0 0 0.06 0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/os1_64.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
     </link>
-    <link name='dji/imu_link'>
+    
+    <link name='imu_link'>
       <pose>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -65,10 +106,89 @@
           <izz>1e-05</izz>
         </inertia> 
       </inertial>
+      <sensor name="imu_sensor" type="imu">
+          <topic>dji/imu</topic>
+          <always_on>1</always_on>
+          <update_rate>250</update_rate>
+              <imu>
+                  <enable_orientation>0</enable_orientation>
+                  <angular_velocity>
+                      <x>
+                          <noise type="gaussian">
+                              <mean>0</mean>
+                              <stddev>0.009</stddev>
+                              <bias_mean>0.00075</bias_mean>
+                              <bias_stddev>0.005</bias_stddev>
+                              <dynamic_bias_stddev>0.00002</dynamic_bias_stddev>
+                              <dynamic_bias_correlation_time>400.0</dynamic_bias_correlation_time>
+                              <precision>0.00025</precision>
+                          </noise>
+                      </x>
+                      <y>
+                          <noise type="gaussian">
+                              <mean>0</mean>
+                              <stddev>0.009</stddev>
+                              <bias_mean>0.00075</bias_mean>
+                              <bias_stddev>0.005</bias_stddev>
+                              <dynamic_bias_stddev>0.00002</dynamic_bias_stddev>
+                              <dynamic_bias_correlation_time>400.0</dynamic_bias_correlation_time>
+                              <precision>0.00025</precision>
+                          </noise>
+                      </y>
+                      <z>
+                          <noise type="gaussian">
+                              <mean>0</mean>
+                              <stddev>0.009</stddev>
+                              <bias_mean>0.00075</bias_mean>
+                              <bias_stddev>0.005</bias_stddev>
+                              <dynamic_bias_stddev>0.00002</dynamic_bias_stddev>
+                              <dynamic_bias_correlation_time>400.0</dynamic_bias_correlation_time>
+                              <precision>0.00025</precision>
+                          </noise>
+                      </z>
+                  </angular_velocity>
+                  <linear_acceleration>
+                      <x>
+                          <noise type="gaussian">
+                              <mean>0</mean>
+                              <stddev>0.021</stddev>
+                              <bias_mean>0.05</bias_mean>
+                              <bias_stddev>0.0075</bias_stddev>
+                              <dynamic_bias_stddev>0.000375</dynamic_bias_stddev>
+                              <dynamic_bias_correlation_time>175.0</dynamic_bias_correlation_time>
+                              <precision>0.005</precision>
+                          </noise>
+                      </x>
+                      <y>
+                          <noise type="gaussian">
+                              <mean>0</mean>
+                              <stddev>0.021</stddev>
+                              <bias_mean>0.05</bias_mean>
+                              <bias_stddev>0.0075</bias_stddev>
+                              <dynamic_bias_stddev>0.000375</dynamic_bias_stddev>
+                              <dynamic_bias_correlation_time>175.0</dynamic_bias_correlation_time>
+                              <precision>0.005</precision>
+                          </noise>
+                      </y>
+                      <z>
+                          <noise type="gaussian">
+                              <mean>0</mean>
+                              <stddev>0.021</stddev>
+                              <bias_mean>0.05</bias_mean>
+                              <bias_stddev>0.0075</bias_stddev>
+                              <dynamic_bias_stddev>0.000375</dynamic_bias_stddev>
+                              <dynamic_bias_correlation_time>175.0</dynamic_bias_correlation_time>
+                              <precision>0.005</precision>
+                          </noise>
+                      </z>
+                  </linear_acceleration>
+              </imu>
+      </sensor>
     </link>
-    <joint name='dji/imu_joint' type='revolute'>
-      <child>dji/imu_link</child>
-      <parent>dji/base_link</parent>
+
+    <joint name='imu_joint' type='revolute'>
+      <child>imu_link</child>
+      <parent>base_link</parent>
       <axis>
         <xyz>1 0 0</xyz>
         <limit>
@@ -84,106 +204,8 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
-    <link name='dji/imugt_link'>
-      <pose>0 0 0 0 0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>1e-05</mass>
-        <inertia>
-          <ixx>1e-05</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1e-05</iyy>
-          <iyz>0</iyz>
-          <izz>1e-05</izz>
-        </inertia> 
-      </inertial>
-    </link>
-    <joint name='dji/imugt_joint' type='revolute'>
-      <child>dji/imugt_link</child>
-      <parent>dji/base_link</parent>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>0</lower>
-          <upper>0</upper>
-          <effort>0</effort>
-          <velocity>0</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <use_parent_model_frame>1</use_parent_model_frame>
-      </axis>
-    </joint>
-    <link name='dji/odometry_sensor1_link'>
-      <pose>0 0 0 0 0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>1e-05</mass>
-        <inertia>
-          <ixx>1e-05</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1e-05</iyy>
-          <iyz>0</iyz>
-          <izz>1e-05</izz>
-        </inertia>
-      </inertial>
-    </link>
-    <joint name='dji/odometry_sensor1_joint' type='revolute'>
-      <child>dji/odometry_sensor1_link</child>
-      <parent>dji/base_link</parent>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>0</lower>
-          <upper>0</upper>
-          <effort>0</effort>
-          <velocity>0</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <use_parent_model_frame>1</use_parent_model_frame>
-      </axis>
-    </joint>
-    <link name='dji/odometry_sensorgt_link'>
-      <pose>0 0 0 0 0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>1e-05</mass>
-        <inertia>
-          <ixx>1e-05</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1e-05</iyy>
-          <iyz>0</iyz>
-          <izz>1e-05</izz>
-        </inertia>
-      </inertial>
-    </link>
-    <joint name='dji/odometry_sensorgt_joint' type='revolute'>
-      <child>dji/odometry_sensorgt_link</child>
-      <parent>dji/base_link</parent>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>0</lower>
-          <upper>0</upper>
-          <effort>0</effort>
-          <velocity>0</velocity>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <use_parent_model_frame>1</use_parent_model_frame>
-      </axis>
-    </joint>
-    <link name='dji/rotor_0'>
+
+    <link name='rotor_0'>
       <pose>0.232 -0.232 0.034 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -232,9 +254,10 @@
       <gravity>1</gravity>
       <velocity_decay/>
     </link>
-    <joint name='dji/rotor_0_joint' type='revolute'>
-      <child>dji/rotor_0</child>
-      <parent>dji/base_link</parent>
+
+    <joint name='rotor_0_joint' type='revolute'>
+      <child>rotor_0</child>
+      <parent>base_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -248,7 +271,8 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
-    <link name='dji/rotor_1'>
+
+    <link name='rotor_1'>
       <pose>-0.232 0.232 0.034 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -297,9 +321,9 @@
       <gravity>1</gravity>
       <velocity_decay/>
     </link>
-    <joint name='dji/rotor_1_joint' type='revolute'>
-      <child>dji/rotor_1</child>
-      <parent>dji/base_link</parent>
+    <joint name='rotor_1_joint' type='revolute'>
+      <child>rotor_1</child>
+      <parent>base_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -313,7 +337,8 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
-    <link name='dji/rotor_2'>
+
+    <link name='rotor_2'>
       <pose>0.232 0.232 0.034 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -362,9 +387,9 @@
       <gravity>1</gravity>
       <velocity_decay/>
     </link>
-    <joint name='dji/rotor_2_joint' type='revolute'>
-      <child>dji/rotor_2</child>
-      <parent>dji/base_link</parent>
+    <joint name='rotor_2_joint' type='revolute'>
+      <child>rotor_2</child>
+      <parent>base_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -378,7 +403,8 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
-    <link name='dji/rotor_3'>
+    
+    <link name='rotor_3'>
       <pose>-0.232 -0.232 0.034 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -427,9 +453,9 @@
       <gravity>1</gravity>
       <velocity_decay/>
     </link>
-    <joint name='dji/rotor_3_joint' type='revolute'>
-      <child>dji/rotor_3</child>
-      <parent>dji/base_link</parent>
+    <joint name='rotor_3_joint' type='revolute'>
+      <child>rotor_3</child>
+      <parent>base_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
@@ -444,246 +470,93 @@
       </axis>
     </joint>
 
-    <!-- Ouster Configuration-->
-
-    <link name="dji/os1_sensor_link">
-      <pose>0 0 0.108 0 0 0</pose>
-      <inertial>
-        <mass>0.1</mass>
-        <inertia>
-          <ixx>0.000090623</ixx>
-          <iyy>0.000090623</iyy>
-          <izz>0.000091036</izz>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyz>0</iyz>
-        </inertia>
-      </inertial>
-      <collision name="top_collision">
-        <geometry>
-          <cylinder>
-            <radius>0.04267</radius>
-            <length>0.07357</length>
-          </cylinder>
-        </geometry>
-      </collision>
-      <!-- <visual name="top_visual">
-        <pose>0 0 -0.0376785 0 0 1.5707</pose>
-        <geometry>
-          <mesh>
-            <scale>1 1 1</scale>
-            <uri>model://arco/meshes/VLP16/VLP16_scan.dae</uri>
-          </mesh>
-        </geometry>
-      </visual> -->
-      <sensor type="ray" name="lase_scan">
-        <pose>0 0 -0.004645 0 0 0</pose>
-        <visualize>false</visualize>
-        <update_rate>10</update_rate>
-        <ray>
-          <scan>
-            <horizontal>
-              <samples>512</samples>
-              <resolution>1</resolution>
-              <min_angle>-3.14159</min_angle>
-              <max_angle>3.14159</max_angle>
-            </horizontal>
-            <vertical>
-              <samples>16</samples>
-              <resolution>1</resolution>
-              <min_angle>-0.2897247</min_angle>
-              <max_angle>0.2897247</max_angle>
-            </vertical>
-          </scan>
-          <range>
-            <min>0.8</min>
-            <max>120</max>
-            <resolution>0.012</resolution>
-          </range>
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.0</stddev>
-          </noise>
-        </ray>
-        <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_velodyne_laser.so">
-          <robotNamespace>dji</robotNamespace> 
-          <topicName>os1_cloud_node_points</topicName>
-          <frameName>os1_sensor</frameName>
-          <min_range>0.8</min_range>
-          <max_range>120.0</max_range>
-          <gaussianNoise>0.008</gaussianNoise>  
-        </plugin>
-      </sensor>
-    </link>
-    <joint name='fixed_velodyne' type='fixed'>
-      <child>dji/os1_sensor_link</child>
-      <parent>dji/base_link</parent>
-      <pose> 0 0 0 0 0 0</pose>
-    </joint>
-
     <!-- Plugin to control differential locomotion-->
+  <plugin
+        filename="ignition-gazebo-multicopter-motor-model-system"
+        name="ignition::gazebo::systems::MulticopterMotorModel">
+        <robotNamespace>dji</robotNamespace>
+        <jointName>rotor_0_joint</jointName>
+        <linkName>rotor_0</linkName>
+        <turningDirection>ccw</turningDirection>
+        <timeConstantUp>0.0125</timeConstantUp>
+        <timeConstantDown>0.025</timeConstantDown>
+        <maxRotVelocity>20000.0</maxRotVelocity>
+        <motorConstant>8.54858e-06</motorConstant>
+        <momentConstant>0.016</momentConstant>
+        <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+        <motorNumber>0</motorNumber>
+        <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+        <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+        <motorSpeedPubTopic>motor_speed/0</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
+        <motorType>velocity</motorType>
+      </plugin>
+      <plugin
+        filename="ignition-gazebo-multicopter-motor-model-system"
+        name="ignition::gazebo::systems::MulticopterMotorModel">
+        <robotNamespace>dji</robotNamespace>
+        <jointName>rotor_1_joint</jointName>
+        <linkName>rotor_1</linkName>
+        <turningDirection>ccw</turningDirection>
+        <timeConstantUp>0.0125</timeConstantUp>
+        <timeConstantDown>0.025</timeConstantDown>
+        <maxRotVelocity>20000.0</maxRotVelocity>
+        <motorConstant>8.54858e-06</motorConstant>
+        <momentConstant>0.016</momentConstant>
+        <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+        <motorNumber>1</motorNumber>
+        <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+        <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+        <motorSpeedPubTopic>motor_speed/1</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
+        <motorType>velocity</motorType>
+      </plugin>
+      <plugin
+        filename="ignition-gazebo-multicopter-motor-model-system"
+        name="ignition::gazebo::systems::MulticopterMotorModel">
+        <robotNamespace>dji</robotNamespace>
+        <jointName>rotor_2_joint</jointName>
+        <linkName>rotor_2</linkName>
+        <turningDirection>cw</turningDirection>
+        <timeConstantUp>0.0125</timeConstantUp>
+        <timeConstantDown>0.025</timeConstantDown>
+        <maxRotVelocity>20000.0</maxRotVelocity>
+        <motorConstant>8.54858e-06</motorConstant>
+        <momentConstant>0.016</momentConstant>
+        <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+        <motorNumber>2</motorNumber>
+        <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+        <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+        <motorSpeedPubTopic>motor_speed/2</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
+        <motorType>velocity</motorType>
+      </plugin>
+      <plugin
+        filename="ignition-gazebo-multicopter-motor-model-system"
+        name="ignition::gazebo::systems::MulticopterMotorModel">
+        <robotNamespace>dji</robotNamespace>
+        <jointName>rotor_3_joint</jointName>
+        <linkName>rotor_3</linkName>
+        <turningDirection>cw</turningDirection>
+        <timeConstantUp>0.0125</timeConstantUp>
+        <timeConstantDown>0.025</timeConstantDown>
+        <maxRotVelocity>20000.0</maxRotVelocity>
+        <motorConstant>8.54858e-06</motorConstant>
+        <momentConstant>0.016</momentConstant>
+        <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
+        <motorNumber>3</motorNumber>
+        <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+        <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+        <motorSpeedPubTopic>motor_speed/3</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
+        <motorType>velocity</motorType>
+      </plugin>
 
-
-    <plugin name='multirotor_base_plugin' filename='librotors_gazebo_multirotor_base_plugin.so'>
-      <robotNamespace>dji</robotNamespace>
-      <linkName>dji/base_link</linkName>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
-    <plugin name='dji_front_right_motor_model' filename='librotors_gazebo_motor_model.so'>
-      <robotNamespace>dji</robotNamespace>
-      <jointName>dji/rotor_0_joint</jointName>
-      <linkName>dji/rotor_0</linkName>
-      <turningDirection>ccw</turningDirection>
-      <timeConstantUp>0.0125</timeConstantUp>
-      <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>838</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
-      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
-      <motorNumber>0</motorNumber>
-      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
-      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
-      <motorSpeedPubTopic>motor_speed/0</motorSpeedPubTopic>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
-    <plugin name='dji_back_left_motor_model' filename='librotors_gazebo_motor_model.so'>
-      <robotNamespace>dji</robotNamespace>
-      <jointName>dji/rotor_1_joint</jointName>
-      <linkName>dji/rotor_1</linkName>
-      <turningDirection>ccw</turningDirection>
-      <timeConstantUp>0.0125</timeConstantUp>
-      <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>838</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
-      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
-      <motorNumber>1</motorNumber>
-      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
-      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
-      <motorSpeedPubTopic>motor_speed/1</motorSpeedPubTopic>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
-    <plugin name='dji_front_left_motor_model' filename='librotors_gazebo_motor_model.so'>
-      <robotNamespace>dji</robotNamespace>
-      <jointName>dji/rotor_2_joint</jointName>
-      <linkName>dji/rotor_2</linkName>
-      <turningDirection>cw</turningDirection>
-      <timeConstantUp>0.0125</timeConstantUp>
-      <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>838</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
-      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
-      <motorNumber>2</motorNumber>
-      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
-      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
-      <motorSpeedPubTopic>motor_speed/2</motorSpeedPubTopic>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
-
-    <plugin name='dji_back_right_motor_model' filename='librotors_gazebo_motor_model.so'>
-      <robotNamespace>dji</robotNamespace>
-      <jointName>dji/rotor_3_joint</jointName>
-      <linkName>dji/rotor_3</linkName>
-      <turningDirection>cw</turningDirection>
-      <timeConstantUp>0.0125</timeConstantUp>
-      <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>838</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
-      <commandSubTopic>gazebo/command/motor_speed</commandSubTopic>
-      <motorNumber>3</motorNumber>
-      <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
-      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
-      <motorSpeedPubTopic>motor_speed/3</motorSpeedPubTopic>
-      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-    </plugin>
-
-    <plugin name='controller_interface' filename='librotors_gazebo_controller_interface.so'>
-      <robotNamespace>dji</robotNamespace>
-      <commandAttitudeThrustSubTopic>command/attitude</commandAttitudeThrustSubTopic>
-      <commandRateThrustSubTopic>command/rate</commandRateThrustSubTopic>
-      <commandMotorSpeedSubTopic>command/motor_speed</commandMotorSpeedSubTopic>
-      <imuSubTopic>imu</imuSubTopic>
-      <motorSpeedCommandPubTopic>gazebo/command/motor_speed</motorSpeedCommandPubTopic>
-    </plugin>
-
-    <plugin name='rotors_gazebo_imu_plugin' filename='librotors_gazebo_imu_plugin.so'>
-      <robotNamespace>dji</robotNamespace>
-      <linkName>dji/imu_link</linkName>
-      <imuTopic>imu</imuTopic>
-      <gyroscopeNoiseDensity>0.0003394</gyroscopeNoiseDensity>
-      <gyroscopeRandomWalk>3.8785e-05</gyroscopeRandomWalk>
-      <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime>
-      <gyroscopeTurnOnBiasSigma>0.0087</gyroscopeTurnOnBiasSigma>
-      <accelerometerNoiseDensity>0.004</accelerometerNoiseDensity>
-      <accelerometerRandomWalk>0.006</accelerometerRandomWalk>
-      <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
-      <accelerometerTurnOnBiasSigma>0.196</accelerometerTurnOnBiasSigma>
-    </plugin>
-
-    <plugin name="rotors_gazebo_imugt_plugin" filename="librotors_gazebo_imu_plugin.so">
-      <robotNamespace>dji</robotNamespace>
-      <linkName>dji/imugt_link</linkName>
-      <imuTopic>ground_truth/imu</imuTopic>
-      <gyroscopeNoiseDensity>0.0</gyroscopeNoiseDensity>
-      <gyroscopeRandomWalk>0.0</gyroscopeRandomWalk>
-      <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime>
-      <gyroscopeTurnOnBiasSigma>0.0</gyroscopeTurnOnBiasSigma>
-      <accelerometerNoiseDensity>0.0</accelerometerNoiseDensity>
-      <accelerometerRandomWalk>0.0</accelerometerRandomWalk>
-      <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
-      <accelerometerTurnOnBiasSigma>0.0</accelerometerTurnOnBiasSigma>
-    </plugin>
-
-    <plugin name="odometry_sensorgt" filename="librotors_gazebo_odometry_plugin.so">
-      <linkName>dji/odometry_sensorgt_link</linkName>
-      <robotNamespace>dji</robotNamespace>
-      <poseTopic>ground_truth/pose</poseTopic>
-      <poseWithCovarianceTopic>ground_truth/pose_with_covariance</poseWithCovarianceTopic>
-      <positionTopic>ground_truth/position</positionTopic>
-      <transformTopic>ground_truth/transform</transformTopic>
-      <odometryTopic>ground_truth/odometry</odometryTopic>
-      <parentFrameId>world</parentFrameId>
-      <childFrameId>dji/odometry_sensor</childFrameId>
-      <measurementDivisor>1</measurementDivisor>
-      <measurementDelay>0</measurementDelay>
-      <unknownDelay>0.0</unknownDelay>
-      <noiseNormalPosition>0 0 0</noiseNormalPosition>
-      <noiseNormalQuaternion>0 0 0</noiseNormalQuaternion>
-      <noiseNormalLinearVelocity>0 0 0</noiseNormalLinearVelocity>
-      <noiseNormalAngularVelocity>0 0 0</noiseNormalAngularVelocity>
-      <noiseUniformPosition>0 0 0</noiseUniformPosition>
-      <noiseUniformQuaternion>0 0 0</noiseUniformQuaternion>
-      <noiseUniformLinearVelocity>0 0 0</noiseUniformLinearVelocity>
-      <noiseUniformAngularVelocity>0 0 0</noiseUniformAngularVelocity>
-    </plugin>
-
-    
-    
-    <plugin name='odometry_sensor1' filename='librotors_gazebo_odometry_plugin.so'>
-      <linkName>dji/odometry_sensor1_link</linkName>
-      <robotNamespace>dji</robotNamespace>
-      <poseTopic>odometry_sensor1/pose</poseTopic>
-      <poseWithCovarianceTopic>odometry_sensor1/pose_with_covariance</poseWithCovarianceTopic>
-      <positionTopic>odometry_sensor1/position</positionTopic>
-      <transformTopic>odometry_sensor1/transform</transformTopic>
-      <odometryTopic>odometry_sensor1/odometry</odometryTopic>
-      <parentFrameId>world</parentFrameId>
-      <childFrameId>dji/odometry_sensor1</childFrameId>
-      <measurementDivisor>1</measurementDivisor>
-      <measurementDelay>0</measurementDelay>
-      <unknownDelay>0.0</unknownDelay>
-      <noiseNormalPosition>0 0 0</noiseNormalPosition>
-      <noiseNormalQuaternion>0 0 0</noiseNormalQuaternion>
-      <noiseNormalLinearVelocity>0 0 0</noiseNormalLinearVelocity>
-      <noiseNormalAngularVelocity>0 0 0</noiseNormalAngularVelocity>
-      <noiseUniformPosition>0 0 0</noiseUniformPosition>
-      <noiseUniformQuaternion>0 0 0</noiseUniformQuaternion>
-      <noiseUniformLinearVelocity>0 0 0</noiseUniformLinearVelocity>
-      <noiseUniformAngularVelocity>0 0 0</noiseUniformAngularVelocity>
-    </plugin>
+      <plugin
+        filename="ignition-gazebo-odometry-publisher-system"
+        name="ignition::gazebo::systems::OdometryPublisher">
+        <dimensions>3</dimensions>
+      </plugin>
 
   </model>
 </sdf>

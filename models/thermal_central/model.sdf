@@ -7,14 +7,14 @@
       <collision name="collision">
         <geometry>
           <mesh>
-            <uri>model://thermal_central/mesh/thermal_central2.stl</uri>
+            <uri>model://thermal_central/mesh/thermal_central_complete.stl</uri>
           </mesh>
         </geometry>
       </collision>
       <visual name="visual">
         <geometry>
           <mesh>
-            <uri>model://thermal_central/mesh/thermal_central2.stl</uri>
+            <uri>model://thermal_central/mesh/thermal_central_complete.stl</uri>
           </mesh>
         </geometry>
       </visual>
