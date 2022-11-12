@@ -25,7 +25,14 @@
             filename="libignition-gazebo-scene-broadcaster-system.so"
             name="ignition::gazebo::systems::SceneBroadcaster">
         </plugin>
-
+      <spherical_coordinates>
+        <surface_model>EARTH_WGS84</surface_model>
+        <world_frame_orientation>ENU</world_frame_orientation>
+        <latitude_deg>-22.986687</latitude_deg>
+        <longitude_deg>-43.202501</longitude_deg>
+        <elevation>0</elevation>
+        <heading_deg>0</heading_deg>
+    </spherical_coordinates>
         <gui fullscreen="1">
 
             <!-- 3D scene -->
@@ -40,6 +47,7 @@
                 <scene>scene</scene>
                 <ambient_light>0.4 0.4 0.4</ambient_light>
                 <background_color>0.8 0.8 0.8</background_color>
+                <camera_pose>6 -12 4 0 0.5 -1.5707</camera_pose>
             </plugin>
 
             <!-- World control -->
@@ -86,10 +94,9 @@
                 <real_time>true</real_time>
                 <real_time_factor>true</real_time_factor>
                 <iterations>true</iterations>
+            </plugin>          
 
-            </plugin>
-
-                  <!-- Insert simple shapes -->
+            <!-- Insert simple shapes -->
             <plugin filename="Shapes" name="Shapes">
                 <ignition-gui>
                 <property key="resizable" type="bool">false</property>

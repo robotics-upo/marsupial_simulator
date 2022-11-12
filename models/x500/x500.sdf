@@ -17,7 +17,63 @@
         </inertia>
       </inertial>
       
-      
+      <sensor name="os1_sensor" type="gpu_lidar">
+        <topic>x500/os1_cloud_node</topic>
+        <pose>0 0 0.0944 0 0 0</pose>
+        <update_rate>20</update_rate>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>1024</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.14159</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>32</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.785398163397</min_angle>
+              <max_angle>0.785398163397</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>40</max>
+            <resolution>0.005</resolution>
+          </range>
+          <noise>
+              <type>gaussian</type>
+              <mean>0</mean>
+              <stddev>0.03</stddev>
+          </noise>
+        </lidar>
+      </sensor>
+       <sensor name="navsat_sensor" type="navsat">
+          <topic>x500/navsat</topic>
+          <always_on>1</always_on>
+          <update_rate>1</update_rate>
+        </sensor>
+      <sensor name="imu_sensor" type="imu">
+          <topic>x500/imu</topic>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+      </sensor>
+      <visual name='base_link_fixed_joint_lump__os_sensor_link_visual_23'>
+        <!-- <pose>0 0 0.06 0 -0 1.5708</pose> -->
+        <pose>0.09 0 -0.21 0 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>meshes/os1_64.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/DarkGrey</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
       <visual name="base_link_visual">
         <pose>0 0 .025 0 0 3.141592654</pose>
         <geometry>
@@ -215,15 +271,8 @@
           </friction>
         </surface>
       </collision>
-      <sensor name="imu_sensor" type="imu">
-        <always_on>1</always_on>
-        <update_rate>250</update_rate>
-      </sensor>
     </link>
     <link name="rotor_0">
-      
-      
-      
       <pose>0.174 -0.174 0.06 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
@@ -440,9 +489,6 @@
       </axis>
     </joint>
     <link name="rotor_3">
-      
-      
-      
       <pose>-0.174 -0.174 0.06 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
@@ -512,7 +558,6 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
-    <plugin filename="libignition-gazebo-imu-system.so" name="ignition::gazebo::systems::Imu" />
     <plugin filename="ignition-gazebo-multicopter-motor-model-system" name="ignition::gazebo::systems::MulticopterMotorModel">
       <robotNamespace>x500</robotNamespace>
       <jointName>rotor_0_joint</jointName>
@@ -581,14 +626,27 @@
       <motorNumber>3</motorNumber>
       <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
-        <motorSpeedPubTopic>motor_speed/3</motorSpeedPubTopic>
+      <motorSpeedPubTopic>motor_speed/3</motorSpeedPubTopic>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-     <plugin
+    <plugin 
+        filename="libignition-gazebo-imu-system.so" 
+        name="ignition::gazebo::systems::Imu">
+    </plugin>
+    <plugin
         filename="ignition-gazebo-odometry-publisher-system"
         name="ignition::gazebo::systems::OdometryPublisher">
         <dimensions>3</dimensions>
+        <update_rate>20</update_rate>
+    </plugin>
+     <!-- Processes the NavSat sensor -->
+      <plugin
+          filename="ignition-gazebo-navsat-system"
+          name="ignition::gazebo::systems::NavSat">
+          <dimensions>3</dimensions>
+          <update_rate>20</update_rate>
       </plugin>
+
   </model>
 </sdf>

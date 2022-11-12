@@ -9,14 +9,14 @@
 
   <!-- <odom_publish_frequency>1</odom_publish_frequency> -->
   <model name="tether_marsupial">
-    <!-- <include>
+    <include>
       <uri>model://arco</uri>
       <pose frame=''> 0 0 0.18 0 0 0</pose>
-    </include> -->
+    </include>
 
      <include>
       <uri>model://x500</uri> 
-      <pose frame=''> -0.1 0 0.0 0 0 0</pose>
+      <pose frame=''> -0.11 0 0.8 0 0 0</pose>
     </include>  
 
     <!--

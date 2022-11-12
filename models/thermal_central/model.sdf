@@ -17,6 +17,12 @@
             <uri>model://thermal_central/mesh/thermal_central_complete.stl</uri>
           </mesh>
         </geometry>
+        <material>
+          <ambient>0.5 0.2 0.2 1</ambient>
+          <diffuse>0.8 0.1 0.2 1</diffuse>
+          <specular>0.05 0.01 0.01 0.1</specular>
+          <emissive>0.2 0.1 0.1 0.8</emissive>
+        </material>
       </visual>
     </link>
   </model>
