@@ -38,7 +38,8 @@
     <arg name="dll_init_pos_z" default="0.4" />
     <arg name="dll_init_pos_th" default="3.1415" />
     <arg name="able_aloam_uav" default="false"/>
-    <arg name="able_dll_uav" default="true"/>
+    <arg name="able_dll_uav" default="false"/>
+    <arg name="able_dll_ugv" default="false"/>
 
     ## UGV Parameter Define real/simulation and controller type
     <arg name="simulation" value="true" />                                  <!-- Define if it will run on a robot or simulation -->
@@ -58,7 +59,7 @@
 
     ## Spawn Model Gazebo
     <node name="marsupial_spawn" pkg="gazebo_ros" type="spawn_model"  output="screen" args="-file $(find marsupial_description)/models/marsupial/marsupial.sdf -sdf -model marsupial
-                                                                        -x $(arg init_pos_x) -y $(arg init_pos_y) -z $(arg init_pos_z) -R $(arg init_pos_th_roll) -P $(arg init_pos_th_pitch) -Y $(arg init_pos_th_yaw)" output="screen"/>
+                                                                        -x $(arg init_pos_x) -y $(arg init_pos_y) -z $(arg init_pos_z) -R $(arg init_pos_th_roll) -P $(arg init_pos_th_pitch) -Y $(arg init_pos_th_yaw)" />
     <!-- <node name="marsupial_spawn" pkg="gazebo_ros" type="spawn_model" args="-file $(find marsupial_description)/models/marsupial/marsupial.sdf -sdf -model marsupial" output="screen">
     </node> -->
 
@@ -78,7 +79,7 @@
     <group ns="$(arg ugv_name)">
         <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_ugv_dll" output="screen"
             args="0 marsupial_launchers dll_simulation.launch robot_name:=$(arg ugv_name) map:=$(arg world_name) 
-            initial_x:=$(arg dll_init_pos_x) initial_y:=$(arg dll_init_pos_y) initial_z:=$(arg dll_init_pos_z) initial_a:=$(arg dll_init_pos_th) ">
+            initial_x:=$(arg dll_init_pos_x) initial_y:=$(arg dll_init_pos_y) initial_z:=$(arg dll_init_pos_z) initial_a:=$(arg dll_init_pos_th)" if="$(arg able_dll_ugv)">
         </node>
 
         <!-- Start Diagnostics Aggreagator -->
@@ -141,10 +142,13 @@
         </node>
 
         ## UAV Localization Stuff
-        <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_dll" output="screen" if="$(arg able_dll_uav)"
+        <!-- <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_dll" output="screen" if="$(arg able_dll_uav)"
             args="0 marsupial_launchers dll_simulation.launch robot_name:=$(arg uav_name) map:=$(arg world_name) 
             initial_x:=$(arg dll_init_pos_x) initial_y:=$(arg dll_init_pos_y) initial_z:=$(arg dll_init_pos_z) initial_a:=$(arg dll_init_pos_th) ">
-        </node>
+        </node> -->
+
+        <node pkg="tf2_ros" type="static_transform_publisher" name="tf2_firefly" unless="$(arg able_dll_uav)"
+        args="0 0 0 0 0 0 $(arg uav_name)/odometry_sensor1 $(arg uav_name)/base_link"/>
     
     </group>
 
