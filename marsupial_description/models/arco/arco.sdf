@@ -990,7 +990,7 @@
     <static>0</static>
     <allow_auto_disable>1</allow_auto_disable>
 
-    <!-- <plugin name='robot_controller' filename='libgazebo_ros_planar_move_optional_tf.so'>
+<!--    <plugin name='robot_controller' filename='libgazebo_ros_planar_move_optional_tf.so'>
       <robotNamespace>arco/</robotNamespace>
       <commandTopic>idmind_motors/set_velocities</commandTopic>
       <odometryTopic>idmind_motors/gazebo_odom</odometryTopic>
@@ -999,7 +999,7 @@
       <robotBaseFrame>arco/base_link</robotBaseFrame>
       <publishTf>1</publishTf>
       <marsupialConfig>1</marsupialConfig>
-    </plugin> -->
+    </plugin>-->
 
   </model>
 </sdf>

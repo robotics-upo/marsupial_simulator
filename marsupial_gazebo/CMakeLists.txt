@@ -23,7 +23,7 @@ include_directories(include ${catkin_INCLUDE_DIRS})
 ## Generate services in the 'srv' folder
 add_service_files(DIRECTORY srv
   FILES
-    SetBias.srv
+    SetBias.srv        #glog/logging.h
     SetReferenceGeoPose.srv
 )
 
