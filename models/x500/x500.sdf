@@ -51,7 +51,7 @@
        <sensor name="navsat_sensor" type="navsat">
           <topic>x500/navsat</topic>
           <always_on>1</always_on>
-          <update_rate>1</update_rate>
+          <update_rate>10</update_rate>
         </sensor>
       <sensor name="imu_sensor" type="imu">
           <topic>x500/imu</topic>

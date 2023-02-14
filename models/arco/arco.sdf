@@ -467,8 +467,8 @@
         <wheel_radius>0.1015</wheel_radius>
         <odom_publish_frequency>100</odom_publish_frequency>
         <topic>arco/idmind_motors/set_velocities</topic>
-        <!-- <odom_topic>odom</odom_topic>
-        <tf_topic>base_link</tf_topic>
+        <odom_topic>arco/odom</odom_topic>
+        <!-- <tf_topic>base_link</tf_topic>
         <frame_id>arco/base_link</frame_id>
         <child_frame_id>arco/base_link</child_frame_id> -->
       </plugin>

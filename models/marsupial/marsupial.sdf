@@ -19,18 +19,46 @@
       <pose frame=''> -0.11 0 0.8 0 0 0</pose>
     </include>  
 
-    <!--
-     <joint name="marsupial/arco_tether_joint" type="fixed">
-      <pose relative_to='tether::link_1'>0 0 -0.022 0 -0 0</pose>
-      <parent>arco::base_platform</parent>
-      <child>tether::link_1</child>
+     <!-- <include>
+      <uri>model://tether</uri> 
+      <pose>-0.1 0 0.74 0 0 0</pose>
+    </include>
+
+    <joint name="arco_tether_joint" type="revolute">
+      <pose>-0.03 0 -0.0 0 0 0</pose>
+      <parent>x500::base_link</parent>
+      <child>tether_model::link_01</child>
+      <axis>
+        <xyz>1.000000 1.000000 0.000000</xyz>
+        <limit>
+          <lower>-3.10000</lower>
+          <upper>3.100000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
     </joint>  -->
 
-    <!-- <joint name="marsupial/tether_firefly_joint" type="fixed">
-      <pose relative_to='tether::link_40'>0 0 0.02 0 -0 0</pose>
-      <parent>ardrone::ardrone/base_link</parent>
-      <child>tether::link_40</child>
+    <!-- <joint name="x500_tether_joint" type="revolute">
+      <pose>0.01 0 -0.04 0 -1.57 0</pose>
+      <parent>tether_model::tether/link_50</parent>
+      <child>x500::base_link</child>
+      <axis>
+        <xyz>0.000000 1.000000 0.000000</xyz>
+        <limit>
+          <lower>-3.00000</lower>
+          <upper>3.00000</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000000</damping>
+          <friction>0.000000</friction>
+        </dynamics>
+      </axis>
     </joint>  -->
+
+
   </model>
 
 </sdf>

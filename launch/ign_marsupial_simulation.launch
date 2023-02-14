@@ -4,7 +4,7 @@
 
     # --------------------------------------------------------------------- PARAMETER --------------------------------------------------------------------- 
     ## Parameter
-    <arg name="world_name" default="edifice"/>
+    <arg name="world_name" default="thermal_central"/>
     <arg name="model" default="marsupial/marsupial.sdf"/>
     <arg name="uav_name" default="x500" />
     <arg name="ugv_name" default="arco" />
@@ -64,6 +64,8 @@
             /arco/os1_cloud_node/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked 
             /arco/imu@sensor_msgs/Imu@ignition.msgs.IMU
             /arco/idmind_motors/set_velocities@geometry_msgs/Twist@ignition.msgs.Twist 
+            /arco/odometry@nav_msgs/Odometry@ignition.msgs.Odometry
+
 
             /x500/os1_cloud_node/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked
             /x500/imu@sensor_msgs/Imu@ignition.msgs.IMU
@@ -81,8 +83,10 @@
         <!-- <remap from="/model/arco/tf" to ="/tf"/> -->   #Publish odom frame
         <!-- <remap from="/gt" to ="/tf"/> -->
         <!-- <remap from="/world/default/model/arco/joint_state" to="/joint_states" /> -->
+        <remap from="/x500/navsat" to="/x500/gps" />
         <remap from="/x500/gazebo/command/motor_speed" to="/command/motor_speed" />
         <remap from="/model/x500/odometry" to="/x500/odom" />
+        <remap from="/arco/odometry" to="/arco/odom" />
     </node>
 
     # --------------------------------------------------- UGV Simulation ---------------------------------------------------
@@ -119,7 +123,7 @@
     </include>
 
     <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_ugv_dll" output="screen"
-            args="0 marsupial_launchers dll_simulation.launch robot_name:=$(arg ugv_name)
+            args="0 marsupial_simulator dll_simulation.launch robot_name:=$(arg ugv_name)
             initial_x:=$(arg dll_init_pos_x) 
             initial_y:=$(arg dll_init_pos_y) 
             initial_z:=$(arg dll_init_pos_z) 
@@ -134,7 +138,7 @@
     </include>
 
     <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_dll" output="screen"
-            args="0 marsupial_launchers dll_simulation.launch robot_name:=$(arg uav_name) 
+            args="0 marsupial_simulator dll_simulation.launch robot_name:=$(arg uav_name) 
             initial_x:=$(arg dll_init_pos_x) 
             initial_y:=$(arg dll_init_pos_y) 
             initial_z:=$(arg dll_init_pos_z_uav) 
