@@ -1,0 +1,23 @@
+<launch>
+
+    <param name="use_sim_time" value="true"/>
+
+    # --------------------------------------------------------------------- PARAMETER --------------------------------------------------------------------- 
+    ## Aguments
+    <arg name="ugv_able" default="true" />
+    <arg name="uav_able" default="false" />
+    <arg name="rviz"	default="true"/>
+  
+    <arg name="world_name" default="rellano45"/>
+    
+    # -------------------------------------------------------------- SIMUlATION AND VISUALIZATION--------------------------------------------------------------------- 
+    
+    <include file="$(find marsupial_simulator)/launch/ign_marsupial_simulation.launch">
+        <arg name="ugv_able"   default="$(arg ugv_able)"/>
+        <arg name="uav_able"   default="$(arg uav_able)"/>
+        <arg name="world_name" default="$(arg world_name)"/>
+    </include>
+  
+    <node pkg="rviz" name="rviz" type="rviz" args="-d $(find marsupial_simulator)/viz/Localization_and_planning.rviz" if="$(arg rviz)"/>
+
+</launch>

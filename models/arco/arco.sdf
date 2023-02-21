@@ -56,7 +56,7 @@
           </box>
         </geometry>
       </collision>
-      <collision name='os1_sensor_collision'>
+      <!-- <collision name='os1_sensor_collision'>
         <pose>0.2795 0 0.12 0 -0 0</pose>
         <geometry>
           <cylinder>
@@ -64,7 +64,7 @@
             <radius>0.0516</radius>
           </cylinder>
         </geometry>
-      </collision>
+      </collision> -->
       <visual name='imu_visual'>
         <pose>0.12 0 0.09 0 -0 0</pose>
         <geometry>
@@ -101,7 +101,7 @@
         </inertia>
         <pose>0 0 0 0 -0 0</pose>
       </inertial>
-      <pose>0.21 0.247 -0.06 1.57 0 0</pose>
+      <pose>0.21 -0.247 -0.06 -1.57 0 0</pose>
       <visual name='visual'>
         <pose>0 0 0 1.57 -0 0</pose>
         <geometry>
@@ -141,7 +141,7 @@
         </inertia>
         <pose>0 0 0 0 -0 0</pose>
       </inertial>
-      <pose>-0.21 0.247 -0.06 1.57 -0 0</pose>
+      <pose>-0.21 -0.247 -0.06 -1.57 -0 0</pose>
       <visual name='visual'>
         <pose>0 0 0 1.57 -0 0</pose>
         <geometry>
@@ -180,7 +180,7 @@
         </inertia>
         <pose>0 0 0 0 -0 0</pose>
       </inertial>
-      <pose>0.21 -0.247 -0.06 1.57 -0 0</pose>
+      <pose>0.21 0.247 -0.06 -1.57 -0 0</pose>
       <visual name='visual'>
         <pose>0 0 0 1.57 -0 0</pose>
         <geometry>
@@ -219,7 +219,7 @@
         </inertia>
         <pose>0 0 0 1.57 -0 0</pose>
       </inertial>
-      <pose>-0.21 -0.247 -0.06 1.57 -0 0</pose>
+      <pose>-0.21 0.247 -0.06 -1.57 -0 0</pose>
       <visual name='visual'>
         <pose>0 0 0 1.57 -0 0</pose>
         <geometry>
@@ -353,7 +353,8 @@
       <sensor name='sensor' type='gpu_lidar'>
       <!-- <sensor name='gpu_lidar' type='gpu_radar'> -->
           <topic>arco/os1_cloud_node</topic>
-          <pose>0 0 0.029335 0 0 0</pose>
+          <ignition_frame_id>arco/os1_lidar</ignition_frame_id>
+          <pose>0 0 0.029335 0 0 3.1416</pose> 
           <update_rate>10</update_rate>
           <ray>
             <noise>
@@ -377,7 +378,7 @@
             </scan>
             <range>
               <min>0.5</min>
-              <max>10.0</max>
+              <max>25.0</max>
               <resolution>0.01</resolution>
             </range>
           </ray>
@@ -466,11 +467,11 @@
         <wheel_separation>0.42</wheel_separation>
         <wheel_radius>0.1015</wheel_radius>
         <odom_publish_frequency>100</odom_publish_frequency>
-        <topic>arco/idmind_motors/set_velocities</topic>
-        <odom_topic>arco/odom</odom_topic>
-        <!-- <tf_topic>base_link</tf_topic>
-        <frame_id>arco/base_link</frame_id>
-        <child_frame_id>arco/base_link</child_frame_id> -->
+        <topic>arco/idmind_motors/set_velocities</topic> #Custom topic that this system will subscribe to in order to receive command velocity messages. This element if optional, and the default value is /model/{name_of_model}/cmd_vel.
+        <odom_topic>arco/odometry</odom_topic>  Custom topic on which this system will publish odometry messages. This element if optional, and the default value is /model/{name_of_model}/odometry.
+        <tf_topic>arco/tf_odom_to_baselink</tf_topic>
+        <frame_id>arco/odom</frame_id>
+        <child_frame_id>arco/base_link</child_frame_id>
       </plugin>
 
   </model>
