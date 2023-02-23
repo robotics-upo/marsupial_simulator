@@ -123,7 +123,8 @@
     
     # Start idmind_teleop
     <include file="$(find idmind_teleop)/launch/idmind_teleop.launch" if="$(arg ugv_able)">
-        <arg name="cmd_vel_topic" default="$(arg ugv_name)/idmind_motors/set_velocities" />
+        <!-- <arg name="cmd_vel_topic" default="$(arg ugv_name)/idmind_motors/set_velocities" /> -->
+        <arg name="cmd_vel_topic" default="/$(arg ugv_name)/cmd_vel_joy" />
     </include>
 
     <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_ugv_dll" output="screen"
@@ -133,6 +134,14 @@
             initial_z:=$(arg dll_init_ugv_pos_z) 
             initial_a:=$(arg dll_init_ugv_pos_th)" if="$(arg ugv_able)">
     </node>
+
+    <rosparam command="load" file="$(find marsupial_simulator)/cfg/twist_mux.yaml" ns="$(arg ugv_name)/twist_mux"/>
+    <rosparam command="load" file="$(find marsupial_simulator)/cfg/locks_mux.yaml" ns="$(arg ugv_name)/twist_mux"/>
+    <group ns="$(arg ugv_name)">   
+        <node pkg="twist_mux" type="twist_mux" name="twist_mux">
+            <remap from="cmd_vel_out" to="idmind_motors/set_velocities"/>
+        </node>
+    </group>
 
     # --------------------------------------------------- UAV Simulation ---------------------------------------------------
 
