@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 read -p "Installation PACKAGES Dependencies for Marsupial Simulator. Press a ENTER to contine. (CTRL+C) to cancel"
 
