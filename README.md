@@ -3,12 +3,12 @@ Initial simulation Version for Tethered Marsupial System.
 
 ## Dependencies
 
-The UAV simulator use quadrotor_ign_utils. Please follow the install instructions of the package:
+The UAV simulator use quadrotor_ign_utils and mav_comm package. Please follow the install instructions of the package:
 
 ```
 your_catkin_ws/src> git clone https://github.com/robotics-upo/quadrotor_ign_utils
+your_catkin_ws/src> git clone https://github.com/ethz-asl/mav_comm
 ```
-
 
 The UGV simulator uses the ARCO simulator from IdMind. In the source folder of your workspace:
 
