@@ -23,6 +23,10 @@ Then build the project, for example in the root folder of your workspace:
 your_catkin_ws> catkin_make
 ```
 
+## Resources Ignition
+
+In case to use the simulatior in Teatro World, is necessary to download ".stl" file from: https://www.dropbox.com/s/khx1v76lt3jpcdv/teatro.stl?dl=0
+
 ## Usage
 
 To launch a basic simulation please use the provided launch file.
