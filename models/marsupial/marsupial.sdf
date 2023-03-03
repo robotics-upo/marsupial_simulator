@@ -14,10 +14,11 @@
       <pose frame=''> 0 0 0.18 0 0 0</pose>
     </include>
 
-     <!-- <include>
+     <include>
       <uri>model://x500</uri> 
-      <pose frame=''> -0.11 0 0.8 0 0 0</pose>
-    </include>   -->
+      <!-- <pose frame=''> -0.11 0 0.8 0 0 0</pose> -->  # General Offset above UGV   next   Use in Teatro ShortMission
+      <pose frame=''> 2.21 -2.39 0.25 0 0 1.55</pose>
+    </include>  
 
      <!-- <include>
       <uri>model://tether</uri> 

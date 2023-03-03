@@ -85,6 +85,7 @@
         <update_rate>1</update_rate>
         <visualize>true</visualize>
         <topic>arco/imu</topic>
+        <ignition_frame_id>arco/imu</ignition_frame_id>
       </sensor>
     </link>
 

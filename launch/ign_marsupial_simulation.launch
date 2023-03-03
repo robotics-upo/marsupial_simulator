@@ -8,26 +8,18 @@
    
     # --------------------------------------------------------------------- PARAMETER --------------------------------------------------------------------- 
     ## Parameter
-    <arg name="world_name" default="rellano45"/>
+    <arg name="world_name" default="teatro"/>
     <arg name="model" default="marsupial/marsupial.sdf"/>
     <arg name="uav_name" default="x500" />
     <arg name="ugv_name" default="arco" />
     #UGV Parameter Define real/simulation and controller type
     <arg name="simulation" value="true" />                                  <!-- Define if it will run on a robot or simulation -->
-    # scenario_1    18.0, 4.0 , 0.3 , 3.1415
-    # scenario_5    14, 16 , 0.4, 0.0 , 0.0 , 3.1415
+    # scenario_1    18.0 4.0 0.3 3.1415
+    # scenario_5    14.0 16.0 0.4 3.1415
     # thermal_central    52.53 , 27.37 , 3.53 , 0 
-    <!-- <arg name="dll_init_pos_x" default="52.5" />
-    <arg name="dll_init_pos_y" default="16" />
-    <arg name="dll_init_pos_z" default="2.4" />  -->
-    <arg name="dll_init_ugv_pos_x" default="33.6" />
-    <arg name="dll_init_ugv_pos_y" default="26.9" />
-    <arg name="dll_init_ugv_pos_z" default="1.3" /> 
-    <arg name="dll_init_ugv_pos_th" default="-2.58" />
-    <arg name="dll_init_uav_pos_x" default="54.85" />
-    <arg name="dll_init_uav_pos_y" default="10.92" />
-    <arg name="dll_init_uav_pos_z" default="2.375" /> 
-    <arg name="dll_init_uav_pos_th" default="3.1415" />
+    # rellano45 -12.5 3.5 0.02 -2.59
+    # Teatro First -2.06 -6.6 0.05 1.0692
+    # Teatro Short mission -3.7921 -8.7014 -0.0185 1.6090 UAVrespectTOmarsupial:= 2.71 -2.39 0.25 0 0 1.55
 
     # --------------------------------------------------------------------- NODES --------------------------------------------------------------------- 
     
@@ -39,20 +31,18 @@
     </include>
 
      # Spawn the node. IMPORTANT: the world name must be the same as the filename of the world file
-    <arg name="x_pos" default="-12.5 " /> #For Rellano45 map
-    <arg name="y_pos" default="3.5" />
-    <arg name="z_pos" default="0.02 " />
-    <arg name="y_rot" default="-2.59" />
-    <!-- <arg name="x_pos" default="5.35" />
-    <arg name="y_pos" default="-17.08" />
-    <arg name="z_pos" default="1.32" />
-    <arg name="y_rot" default="3.1415" /> -->
+
+    <arg name="x_pos" default="-3.9821" /> #For Teatro ShortMission
+    <arg name="y_pos" default="-9.1014" />
+    <arg name="z_pos" default="-0.0185" />
+    <arg name="y_rot" default="1.6090" />
+
     <node
         pkg="ros_ign_gazebo"
         type="create"
         name="marsupial_spawn"
         output="screen"
-        args="-world $(arg world_name) -file $(find marsupial_simulator)/models/$(arg model) -name marsupial -allow_renaming true -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -Y $(arg y_rot) --timeout 20000 ">
+        args="-world $(arg world_name) -file $(find marsupial_simulator)/models/$(arg model) -name marsupial -allow_renaming true -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -Y $(arg y_rot) --timeout 100000 ">
     </node>
 
     # node provides a network bridge which enables the exchange of messages between ROS and Gazebo Transport
@@ -72,12 +62,12 @@
             /arco/odometry@nav_msgs/Odometry@ignition.msgs.Odometry
             /arco/tf_odom_to_baselink@tf2_msgs/TFMessage@ignition.msgs.Pose_V
 
-
             /x500/os1_cloud_node/points@sensor_msgs/PointCloud2@ignition.msgs.PointCloudPacked
             /x500/imu@sensor_msgs/Imu@ignition.msgs.IMU
             /x500/navsat@sensor_msgs/NavSatFix@ignition.msgs.NavSat
             /model/x500/odometry@nav_msgs/Odometry@ignition.msgs.Odometry
             /x500/gazebo/command/motor_speed@mav_msgs/Actuators@ignition.msgs.Actuators
+            /x500/tf_odom_to_baselink@tf2_msgs/TFMessage@ignition.msgs.Pose_V
             ">
             <!-- /x500/gazebo/command/twist@geometry_msgs/Twist@ignition.msgs.Twist -->
 
@@ -85,12 +75,15 @@
             <!--/gt@tf2_msgs/TFMessage@ignition.msgs.Pose_V
             /world/default/model/arco/joint_state@sensor_msgs/JointState@ignition.msgs.Model
             /model/arco/front_right/tf@tf2_msgs/TFMessage@ignition.msgs.Pose_V -->
-        <remap from="/arco/tf_odom_to_baselink" to ="/tf"/>   #Publish odom frame
+        <remap from="/arco/tf_odom_to_baselink" to ="/tf"/>   #Publish odom tf 
+        <remap from="/x500/tf_odom_to_baselink" to ="/tf"/>   #Publish odom tf 
         <!-- <remap from="/gt" to ="/tf"/> -->
         <!-- <remap from="/world/default/model/arco/joint_state" to="/joint_states" /> -->
-        <remap from="/x500/navsat" to="/x500/gps" />
         <remap from="/x500/gazebo/command/motor_speed" to="/command/motor_speed" />
-        <remap from="/model/x500/odometry" to="/x500/odom" />
+        <remap from="/x500/os1_cloud_node/points" to="/os1_cloud_node/points_non_dense" />
+        <remap from="/x500/imu"  to="/dji_sdk/imu" />
+        <remap from="/x500/navsat" to="/dji_sdk/gps_position" />
+        <remap from="/model/x500/odometry" to="/dji_sdk/odom"/>
         <remap from="/arco/os1_cloud_node/points" to="/arco_os1_cloud_node/points_non_dense" />
         <remap from="/arco/imu" to="/arco/idmind_imu/imu" />
         <remap from="/arco/odometry" to="/arco/odom" />
@@ -128,11 +121,8 @@
     </include>
 
     <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_ugv_dll" output="screen"
-            args="0 marsupial_launchers dll_arco.launch imu_topic:=/arco/idmind_imu/imu in_cloud_topic:=/arco_os1_cloud_node/points_non_dense map:=cutted_rellano45.bt
-            initial_x:=$(arg dll_init_ugv_pos_x) 
-            initial_y:=$(arg dll_init_ugv_pos_y) 
-            initial_z:=$(arg dll_init_ugv_pos_z) 
-            initial_a:=$(arg dll_init_ugv_pos_th)" if="$(arg ugv_able)">
+            args="10 marsupial_launchers dll_arco.launch imu_topic:=/arco/idmind_imu/imu in_cloud_topic:=/arco_os1_cloud_node/points_non_dense map:=$(arg world_name)" 
+            if="$(arg ugv_able)">
     </node>
 
     <rosparam command="load" file="$(find marsupial_simulator)/cfg/twist_mux.yaml" ns="$(arg ugv_name)/twist_mux"/>
@@ -145,32 +135,29 @@
 
     # --------------------------------------------------- UAV Simulation ---------------------------------------------------
 
-    <include file="$(find marsupial_launchers)/launch/frames_drone.launch" if="$(arg uav_able)"/>
+    <include file="$(find marsupial_launchers)/drone_launch/frames.launch" if="$(arg uav_able)"/>
 
     <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_dll" output="screen"
-            args="0 marsupial_launchers dll.launch imu_topic:=/dji_sdk/imu in_cloud_topic:=/os1_cloud_node/points_non_dense  map:=rellano45.bt
-            initial_x:=$(arg dll_init_uav_pos_x) 
-            initial_y:=$(arg dll_init_uav_pos_y) 
-            initial_z:=$(arg dll_init_uav_pos_z) 
-            initial_a:=$(arg dll_init_uav_pos_th) " if="$(arg uav_able)">
+            args="15 marsupial_launchers dll.launch imu_topic:=/dji_sdk/imu in_cloud_topic:=/os1_cloud_node/points_non_dense  map:=$(arg world_name)" 
+            if="$(arg uav_able)">
     </node>
 
     ## UAV Control Stuff
     <node name="roll_pitch_yawrate_thrust_controller_node" pkg="quadrotor_ign_controller" type="roll_pitch_yawrate_thrust_controller_node" output="screen" if="$(arg uav_able)">
         <rosparam command="load" file="$(find quadrotor_ign_controller)/resources/roll_pitch_yawrate_thrust_controller_dji.yaml" />
         <rosparam command="load" file="$(find quadrotor_ign_controller)/resources/dji.yaml"/>
-        <remap from="/odometry" to="/$(arg uav_name)/odom"/> # /laser_odom_to_init" loam
+        <remap from="/odometry" to="/dji_sdk/odom"/> # /laser_odom_to_init" loam
     </node>
 
     <node name="velocity_PID_controller" pkg="quadrotor_ign_controller" type="velocity_PID_controller" output="screen" if="$(arg uav_able)">
-        <remap from="odom" to="/$(arg uav_name)/odom"/> 
+        <remap from="odom" to="/dji_sdk/odom"/> 
     </node>
 
      ## UAV Joy Stuff
     <node pkg="joy" type="joy_node" name="joy_node_$(arg uav_name)" respawn="true" if="$(arg uav_able)">
         <param name="dev" type="string" value="/dev/input/js1" /> 
         <param name="deadzone" value="0.12" />
-        <remap from="/joy" to="/joy_$(arg uav_name)"/> 
+        <remap from="/joy" to="/dji_sdk/rc"/> 
     </node>
 
     <node pkg="quadrotor_joy_interface" type="joy_vel" name="joy_interface_$(arg uav_name)" respawn="true" if="$(arg uav_able)">

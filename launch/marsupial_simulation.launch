@@ -5,10 +5,11 @@
     # --------------------------------------------------------------------- PARAMETER --------------------------------------------------------------------- 
     ## Aguments
     <arg name="ugv_able" default="true" />
-    <arg name="uav_able" default="false" />
+    <arg name="uav_able" default="true" />
     <arg name="rviz"	default="true"/>
   
-    <arg name="world_name" default="rellano45"/>
+    <arg name="world_name" default="teatro_wall"/>
+    <!-- <arg name="world_name" default="teatro_wall"/> -->
     
     # -------------------------------------------------------------- SIMUlATION AND VISUALIZATION--------------------------------------------------------------------- 
     
@@ -18,6 +19,6 @@
         <arg name="world_name" default="$(arg world_name)"/>
     </include>
   
-    <node pkg="rviz" name="rviz" type="rviz" args="-d $(find marsupial_simulator)/viz/Localization_and_planning.rviz" if="$(arg rviz)"/>
+    <node pkg="rviz" name="rviz" type="rviz" args="-d $(find marsupial_launchers)/viz/complete_marsupial_mission.rviz" if="$(arg rviz)"/>
 
 </launch>
