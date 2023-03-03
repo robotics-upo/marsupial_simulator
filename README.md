@@ -3,18 +3,17 @@ Initial simulation Version for Tethered Marsupial System.
 
 ## Dependencies
 
-The UAV simulator is based on the Rotors Gazebo package. Please follow the install instructions of the package:
+The UAV simulator use quadrotor_ign_utils. Please follow the install instructions of the package:
 
 ```
-your_catkin_ws/src> git clone https://github.com/ethz-asl/rotors_simulator
-your_catkin_ws/src> git clone https://github.com/ethz-asl/mav_comm
+your_catkin_ws/src> git clone https://github.com/robotics-upo/quadrotor_ign_utils
 ```
 
 
 The UGV simulator uses the ARCO simulator from IdMind. In the source folder of your workspace:
 
 ```
-your_catkin_ws/src> git clone https://github.com/idmind-robotics/catkin_newarco
+your_catkin_ws/src> git clone https://github.com/robotics-upo/catkin_newarco
 your_catkin_ws/src> cd catkin_newarco/src/
 your_catkin_ws/src> git clone https://github.com/idmind-robotics/idmind_serial2
 ```
