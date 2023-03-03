@@ -25,7 +25,10 @@ your_catkin_ws> catkin_make
 
 ## Resources Ignition
 
-In case to use the simulatior in Teatro World, is necessary to download ".stl" file from: https://www.dropbox.com/s/khx1v76lt3jpcdv/teatro.stl?dl=0
+In case to use the simulator in Teatro World, is necessary to download ".stl" file from: https://www.dropbox.com/s/khx1v76lt3jpcdv/teatro.stl?dl=0 .
+
+Save the file in: marsupial_simulator/models/teatro/mesh/ .
+
 
 ## Usage
 
