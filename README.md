@@ -15,6 +15,8 @@ The UGV simulator uses the ARCO simulator from IdMind. In the source folder of y
 
 ```
 your_catkin_ws/src> git clone https://github.com/idmind-robotics/catkin_newarco
+your_catkin_ws/src> cd catkin_newarco/src/
+your_catkin_ws/src> git clone https://github.com/idmind-robotics/idmind_serial2
 ```
 
 Then build the project, for example in the root folder of your workspace:
