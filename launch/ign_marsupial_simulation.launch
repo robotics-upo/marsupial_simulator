@@ -112,13 +112,12 @@
     </include> -->
 
     # Start interface node
-    <include file="$(find idmind_interface)/launch/idmind_interface.launch" if="$(arg ugv_able)"/>
+    <!-- <include file="$(find idmind_interface)/launch/idmind_interface.launch" if="$(arg ugv_able)"/> -->
     
     # Start idmind_teleop
-    <include file="$(find idmind_teleop)/launch/idmind_teleop.launch" if="$(arg ugv_able)">
-        <!-- <arg name="cmd_vel_topic" default="$(arg ugv_name)/idmind_motors/set_velocities" /> -->
+    <!-- <include file="$(find idmind_teleop)/launch/idmind_teleop.launch" if="$(arg ugv_able)">
         <arg name="cmd_vel_topic" default="/$(arg ugv_name)/cmd_vel_joy" />
-    </include>
+    </include> -->
 
     <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_ugv_dll" output="screen"
             args="10 marsupial_launchers dll_arco.launch imu_topic:=/arco/idmind_imu/imu in_cloud_topic:=/arco_os1_cloud_node/points_non_dense map:=$(arg world_name)" 
@@ -135,38 +134,7 @@
 
     # --------------------------------------------------- UAV Simulation ---------------------------------------------------
 
-    <include file="$(find marsupial_launchers)/drone_launch/frames.launch" if="$(arg uav_able)"/>
 
-    <node pkg="timed_roslaunch" type="timed_roslaunch.sh" name="timed_uav_dll" output="screen"
-            args="15 marsupial_launchers dll.launch imu_topic:=/dji_sdk/imu in_cloud_topic:=/os1_cloud_node/points_non_dense  map:=$(arg world_name)" 
-            if="$(arg uav_able)">
-    </node>
 
-    ## UAV Control Stuff
-    <node name="roll_pitch_yawrate_thrust_controller_node" pkg="quadrotor_ign_controller" type="roll_pitch_yawrate_thrust_controller_node" output="screen" if="$(arg uav_able)">
-        <rosparam command="load" file="$(find quadrotor_ign_controller)/resources/roll_pitch_yawrate_thrust_controller_dji.yaml" />
-        <rosparam command="load" file="$(find quadrotor_ign_controller)/resources/dji.yaml"/>
-        <remap from="/odometry" to="/dji_sdk/odom"/> # /laser_odom_to_init" loam
-    </node>
-
-    <node name="velocity_PID_controller" pkg="quadrotor_ign_controller" type="velocity_PID_controller" output="screen" if="$(arg uav_able)">
-        <remap from="odom" to="/dji_sdk/odom"/> 
-    </node>
-
-     ## UAV Joy Stuff
-    <node pkg="joy" type="joy_node" name="joy_node_$(arg uav_name)" respawn="true" if="$(arg uav_able)">
-        <param name="dev" type="string" value="/dev/input/js1" /> 
-        <param name="deadzone" value="0.12" />
-        <remap from="/joy" to="/dji_sdk/rc"/> 
-    </node>
-
-    <node pkg="quadrotor_joy_interface" type="joy_vel" name="joy_interface_$(arg uav_name)" respawn="true" if="$(arg uav_able)">
-        <param name="max_vel_x" value="1.0" /> 
-        <param name="max_vel_y" value="1.0" /> 
-        <param name="max_yaw_rate" value="1.0" /> 
-        <param name="axis_vel_y_" value="3" /> #axes x for node joy
-        <param name="axis_vel_x_" value="4" /> #axes y for node joy
-        <remap from="/joy" to="/joy_$(arg uav_name)"/> 
-    </node>
 
 </launch>
